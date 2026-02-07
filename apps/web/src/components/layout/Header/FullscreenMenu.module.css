@@ -1,0 +1,229 @@
+.overlay {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90; /* sotto l'header */
+  backdrop-filter: blur(18px);
+  background: rgba(0, 0, 32, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* area clic invisibile per chiudere */
+.closeArea {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  padding: clamp(40px, 8vw, 80px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 10vw, 120px);
+}
+
+/* =========================
+   DESKTOP DIVIDER
+========================= */
+
+.container::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.12),
+    transparent
+  );
+}
+
+@media (max-width: 768px) {
+  .container::after {
+    display: none;
+  }
+}
+
+
+
+/* =========================
+   LEFT
+========================= */
+
+.left ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+@media (max-width: 768px) {
+  .left ul {
+    gap: 14px;
+  }
+}
+
+
+.left a {
+  font-family: var(--font-title); /* Monument */
+  font-size: clamp(2.2rem, 4.5vw, 4rem);
+  letter-spacing: 0.04em;
+  color: #fff;
+  opacity: 0.9;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.left a:hover {
+  opacity: 1;
+  transform: translateX(6px);
+}
+
+/* =========================
+   RIGHT
+========================= */
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sectionTitle {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.right ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+@media (max-width: 768px) {
+  .right ul {
+    gap: 12px;
+  }
+}
+
+
+.right a {
+  font-family: var(--font-title);
+  font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+  letter-spacing: 0.04em;
+  color: #fff;
+  opacity: 0.75;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.right a:hover {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .left a {
+    font-size: 2.1rem;
+  }
+
+  .right a {
+    font-size: 1.3rem;
+  }
+}
+
+
+
+/* =========================
+   BOTTOM INFO
+========================= */
+
+.bottom {
+  position: absolute;
+  bottom: 32px;
+  left: var(--container-padding);
+  right: var(--container-padding);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  z-index: 2;
+  gap: 20px;
+}
+
+/* ADDRESS */
+.address {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* CENTER TEXT */
+.bottomCenter {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+/* SOCIALS */
+.socials {
+  display: flex;
+  justify-content: flex-end;
+  gap: 22px;
+}
+
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.socials a:hover {
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.socials svg {
+  font-size: 0.85rem;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+  .bottom {
+    display: none;
+  }
+}

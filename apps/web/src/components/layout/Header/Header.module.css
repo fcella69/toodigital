@@ -1,0 +1,185 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  transition:
+    background-color 0.3s var(--ease-standard),
+    backdrop-filter 0.3s var(--ease-standard),
+    border-color 0.3s var(--ease-standard);
+}
+:root {
+  --header-height: 88px;
+}
+@media (max-width: 768px) {
+  :root {
+    --header-height: 72px;
+  }
+}
+
+.scrolled {
+  backdrop-filter: blur(12px);
+  background-color: rgba(11, 13, 16, 0.6);
+  border-bottom: 0px solid rgba(8, 3, 36, 0.06);
+}
+
+.inner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 20px var(--container-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* MOBILE / BASE */
+.logo img {
+  height: auto;
+  max-height: 34px;
+  width: auto;
+  transition: transform 0.3s var(--ease-standard),
+    opacity 0.3s var(--ease-standard);
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+  .logo img {
+    max-height: 44px;
+  }
+}
+
+/* MICRO INTERAZIONE */
+.logo:hover img {
+  opacity: 0.85;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+/* =========================
+   CTA (DESKTOP ONLY)
+========================= */
+
+.cta {
+  font-family:  var(--font-title);
+  letter-spacing: 0.1em;
+  display: none;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  border-radius: 999px;
+  background: var(--gradient-primary);
+  color: #080221;
+  font-weight: 200;
+  transition: transform 0.2s var(--ease-standard),
+    box-shadow 0.2s var(--ease-standard);
+}
+
+.cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(255, 122, 24, 0.35);
+}
+
+/* =========================
+   MENU BUTTON
+========================= */
+
+.menuButton {
+  font-family: var(--font-title);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  color: var(--color-text);
+  transition: background-color 0.3s var(--ease-standard),
+    border 0.3s var(--ease-standard);
+}
+
+/* MENU TEXT */
+.menuText {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* =========================
+   ICONA MENU
+========================= */
+
+.menuIcon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+}
+
+/* LINEE */
+.menuIcon span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+  transition: transform 0.35s var(--ease-standard),
+    background-color 0.35s var(--ease-standard);
+}
+
+/* STATO CHIUSO */
+.menuIcon span:first-child {
+  top: 6px;
+}
+
+.menuIcon span:last-child {
+  bottom: 6px;
+}
+
+/* =========================
+   MENU OPEN → X
+========================= */
+
+.menuOpen {
+  background-color: rgba(255, 122, 24, 0.15);
+  border: 1px solid rgba(255, 122, 24, 0.4);
+}
+
+.menuOpen .menuIcon span {
+  background-color: var(--color-primary);
+}
+
+.menuOpen .menuIcon span:first-child {
+  transform: rotate(45deg) translate(3px, 3px);
+}
+
+.menuOpen .menuIcon span:last-child {
+  transform: rotate(-45deg) translate(3px, -3px);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (min-width: 1024px) {
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
