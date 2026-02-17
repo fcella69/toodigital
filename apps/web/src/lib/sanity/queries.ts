@@ -78,7 +78,7 @@ export const contactsQuery = `
     kicker,
     title,
     subtitle,
-    
+
     image {
       asset->{
         url
@@ -86,54 +86,57 @@ export const contactsQuery = `
       alt
     },
 
-    nameField {
-      enabled,
-      label
-    },
+    "config": {
+      nameField {
+        enabled,
+        label
+      },
 
-    surnameField {
-      enabled,
-      label
-    },
+      surnameField {
+        enabled,
+        label
+      },
 
-    emailField {
-      enabled,
-      label
-    },
+      emailField {
+        enabled,
+        label
+      },
 
-    companyField {
-      enabled,
-      label
-    },
+      companyField {
+        enabled,
+        label
+      },
 
-    serviceField {
-      enabled,
-      label,
-      options[] {
+      serviceField {
+        enabled,
         label,
-        value
-      }
-    },
+        options[] {
+          label,
+          value
+        }
+      },
 
-    budgetField {
-      enabled,
-      label,
-      options[] {
+      budgetField {
+        enabled,
         label,
-        value
-      }
-    },
+        options[] {
+          label,
+          value
+        }
+      },
 
-    messageField {
-      enabled,
-      label
-    },
+      messageField {
+        enabled,
+        label
+      },
 
-    privacyText,
-    submitLabel
+      privacyText,
+      submitLabel
+    }
   }
 }
 `;
+
 
 export const aboutQuery = `
 *[_type == "aboutPage"][0]{

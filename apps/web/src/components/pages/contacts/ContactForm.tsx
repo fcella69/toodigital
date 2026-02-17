@@ -64,14 +64,16 @@ export default function ContactForm({ config }: Props) {
         submitLabel,
     } = config;
 
-    // ⛔ il servizio è OBBLIGATORIO: se disabilitato o senza opzioni → errore visibile
-    if (!serviceField?.enabled || !serviceField.options?.length) {
-        return (
-            <div style={{ color: "red" }}>
-                ContactForm: serviceField non configurato
-            </div>
-        );
-    }
+    // Fallback servizi di default
+    const DEFAULT_SERVICES: SelectOption[] = [
+        { label: "Sito web", value: "website" }
+    ];
+
+    const services =
+        serviceField?.enabled && serviceField.options?.length
+            ? serviceField.options
+            : DEFAULT_SERVICES;
+
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -115,12 +117,12 @@ export default function ContactForm({ config }: Props) {
                 </label>
             )}
 
-            {serviceField.enabled && (
+            {serviceField?.enabled !== false && (
                 <label>
-                    <span>{serviceField.label}</span>
+                    <span>{serviceField?.label ?? "Servizio di interesse"}</span>
                     <select name="service" required>
                         <option value="">Seleziona</option>
-                        {serviceField.options!.map((o) => (
+                        {services.map((o) => (
                             <option key={o.value} value={o.value}>
                                 {o.label}
                             </option>
@@ -128,6 +130,7 @@ export default function ContactForm({ config }: Props) {
                     </select>
                 </label>
             )}
+
 
             {budgetField?.enabled && budgetField.options?.length && (
                 <label>
