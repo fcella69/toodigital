@@ -34,7 +34,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   // ✅ FETCH SERVER-SIDE (NO CORS)
-  const headerData = await sanityFetch(headerQuery);
+  const headerData = await sanityFetch<any>(headerQuery);
 
   return (
     <html
