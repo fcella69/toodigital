@@ -10,9 +10,15 @@ export const metadata = {
   description: "Contatta Too Digital per informazioni, assistenza o nuove collaborazioni.",
 };
 
-export default async function ContactsPage() {
-  const data = await sanityFetch(contactsQuery);
+type ContactsPageData = {
+  hero: any;
+  support: any;
+  form: any;
+};
 
+export default async function ContactsPage() {
+  const data = await sanityFetch<ContactsPageData>(contactsQuery);
+  
   return (
     <main>
       <ContactsHero
