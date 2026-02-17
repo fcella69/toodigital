@@ -57,7 +57,7 @@ export default function ContactsFormSection({ form }: Props) {
 
                     {/* RIGHT */}
                     <div className={styles.formWrapper}>
-                        <ContactForm config={form} />
+                        <ContactForm config={form.config} />
                     </div>
                 </div>
             </div>
