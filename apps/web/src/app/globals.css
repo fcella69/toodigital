@@ -21,7 +21,7 @@ body {
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -35,49 +35,49 @@ body {
      COLORS
   ========================= */
 
-  /* Base background */
-  --color-bg: #000020;
-  --color-bg-soft: #020233;
-  --color-bg-elevated: #05054a;
+  /* Background (più istituzionale, meno blu notte) */
+  --color-bg: #0b0e17;
+  --color-bg-soft: #12172a;
+  --color-bg-elevated: #181e36;
 
   /* Text */
-  --color-text: #e9ebf1;
-  --color-text-muted: #a2a6c3;
+  --color-text: #f1f3f9;
+  --color-text-muted: #b5bad6;
 
   /* Brand */
-  --color-primary: #ee6224;   /* arancio principale */
+  --color-primary: #ee6224;    /* arancio logo */
   --color-primary-soft: #ea8922;
-  --color-secondary: #104a9c; /* blu logo */
+  --color-secondary: #104a9c;  /* blu logo */
 
   /* =========================
      GRADIENTS
   ========================= */
 
-  /* CTA / accent */
+  /* Primary accent */
   --gradient-primary: linear-gradient(
     135deg,
     #ee6224 0%,
     #ea8922 100%
   );
 
-  /* Blu brand */
+  /* Blue brand */
   --gradient-secondary: linear-gradient(
     135deg,
     #0c3c80 0%,
     #104a9c 100%
   );
 
-  /* Dark depth */
+  /* Subtle depth */
   --gradient-dark: linear-gradient(
     180deg,
-    rgba(0, 0, 32, 0) 0%,
-    #000020 100%
+    rgba(11, 14, 23, 0) 0%,
+    #0b0e17 100%
   );
 
-  /* Soft ambient background */
+  /* Ambient corporate glow */
   --gradient-ambient: radial-gradient(
-    circle at 30% 20%,
-    rgba(16, 74, 156, 0.25),
+    circle at 20% 15%,
+    rgba(16, 74, 156, 0.18),
     transparent 60%
   );
 
@@ -115,25 +115,31 @@ h4,
 h5,
 h6 {
   font-family: var(--font-title), sans-serif;
+  color: var(--color-text);
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
-
 h1 {
-  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-size: clamp(2.8rem, 6vw, 5.8rem);
+  line-height: 1.05;
 }
 
 h2 {
-  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  line-height: 1.1;
 }
 
 h3 {
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  line-height: 1.2;
 }
 
 p {
   font-size: 1rem;
   color: var(--color-text-muted);
   max-width: 70ch;
+  line-height: 1.7;
 }
 
 /* =========================

@@ -3,14 +3,35 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import styles from "./FullscreenMenu.module.css";
-import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaFacebookF,
+  FaLinkedinIn,
+  FaXTwitter,
+} from "react-icons/fa6";
+
+
+import type { HeaderData } from "./Header";
 
 type Props = {
   open: boolean;
   onClose: () => void;
+  data: HeaderData | null;
 };
 
-export default function FullscreenMenu({ open, onClose }: Props) {
+const SOCIAL_ICONS = {
+  instagram: FaInstagram,
+  facebook: FaFacebookF,
+  linkedin: FaLinkedinIn,
+  twitter: FaXTwitter,
+};
+
+
+export default function FullscreenMenu({
+  open,
+  onClose,
+  data,
+}: Props) {
   const [shouldRender, setShouldRender] = useState(open);
 
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -20,97 +41,83 @@ export default function FullscreenMenu({ open, onClose }: Props) {
 
   const tlRef = useRef<gsap.core.Timeline | null>(null);
 
-  // 1) evita flash: prima del paint settiamo hidden
+  /* PREVENT FLASH */
   useLayoutEffect(() => {
     if (!overlayRef.current) return;
-
     gsap.set(overlayRef.current, {
       autoAlpha: 0,
       pointerEvents: "none",
     });
   }, []);
 
-  // 2) se open diventa true, montiamo e animiamo apertura
   useEffect(() => {
     if (open) setShouldRender(true);
   }, [open]);
 
-  // 3) play open/close quando cambia open (ma solo se renderizzato)
   useEffect(() => {
-    if (!shouldRender) return;
-    if (!overlayRef.current) return;
+    if (!shouldRender || !overlayRef.current) return;
 
-    // kill timeline precedente
     tlRef.current?.kill();
-    tlRef.current = null;
 
     const overlay = overlayRef.current;
-
-    const left = leftRef.current;
-    const right = rightRef.current;
-    const bottom = bottomRef.current;
-
-    const menuLis = overlay.querySelectorAll("li");
+    const items = overlay.querySelectorAll("li");
 
     if (open) {
-      // OPEN
       gsap.set(overlay, { pointerEvents: "auto" });
 
-      const tl = gsap.timeline();
-      tlRef.current = tl;
-
-      tl.set(overlay, { autoAlpha: 1 })
-        .fromTo(
-          overlay,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.35, ease: "power2.out" },
-          0
-        )
+      tlRef.current = gsap
+        .timeline()
+        .to(overlay, {
+          autoAlpha: 1,
+          duration: 0.35,
+          ease: "power2.out",
+        })
         .from(
-          [left, right],
+          [leftRef.current, rightRef.current],
           {
-            y: 36,
+            y: 48,
             opacity: 0,
-            duration: 0.85,
+            duration: 1,
             ease: "power4.out",
             stagger: 0.12,
           },
-          0.08
+          0.1
         )
         .from(
-          menuLis,
+          items,
           {
-            y: 18,
+            y: 20,
             opacity: 0,
-            duration: 0.55,
+            duration: 0.6,
             ease: "power3.out",
-            stagger: 0.05,
+            stagger: 0.06,
           },
-          0.22
+          0.35
         )
         .from(
-          bottom,
+          bottomRef.current,
           {
-            y: 18,
+            y: 16,
             opacity: 0,
-            duration: 0.55,
+            duration: 0.5,
             ease: "power3.out",
           },
-          0.45
+          0.55
         );
     } else {
-      // CLOSE (con animazione, poi smontiamo)
-      const tl = gsap.timeline({
+      tlRef.current = gsap.timeline({
         onComplete: () => {
-          gsap.set(overlay, { autoAlpha: 0, pointerEvents: "none" });
+          gsap.set(overlay, {
+            autoAlpha: 0,
+            pointerEvents: "none",
+          });
           setShouldRender(false);
         },
       });
-      tlRef.current = tl;
 
-      tl.to(overlay, {
-        opacity: 0,
-        duration: 0.28,
+      tlRef.current.to(overlay, {
+        autoAlpha: 0,
+        duration: 0.25,
         ease: "power2.in",
       });
     }
@@ -126,58 +133,70 @@ export default function FullscreenMenu({ open, onClose }: Props) {
   return (
     <div ref={overlayRef} className={styles.overlay}>
       <div className={styles.container}>
-        {/* LEFT MENU */}
+        {/* LEFT */}
         <nav ref={leftRef} className={styles.left}>
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/chi-siamo">Chi siamo</a></li>
-            <li><a href="/portfolio">Portfolio</a></li>
-            <li><a href="/contatti">Contatti</a></li>
+            {data?.menuLeft?.map((item, i) => (
+              <li key={i}>
+                <a href={item.link}>{item.label}</a>
+              </li>
+            ))}
           </ul>
         </nav>
 
-        {/* RIGHT MENU */}
+        {/* RIGHT */}
         <div ref={rightRef} className={styles.right}>
-          <span className={styles.sectionTitle}>Comunicazione</span>
+          {data?.menuRightTitle && (
+            <span className={styles.sectionTitle}>
+              {data.menuRightTitle}
+            </span>
+          )}
+
           <ul>
-            <li><a href="/comunicazione/branding">Branding</a></li>
-            <li><a href="/comunicazione/web-design">Web Design</a></li>
-            <li><a href="/comunicazione/social">Gestione Social</a></li>
-            <li><a href="/comunicazione/fotografia">Fotografia</a></li>
+            {data?.menuRight?.map((item, i) => (
+              <li key={i}>
+                <a href={item.link}>{item.label}</a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
 
-      {/* BOTTOM INFO */}
+      {/* BOTTOM */}
       <div ref={bottomRef} className={styles.bottom}>
-        <div className={styles.address}>
-          Via Sanremo, 39 · 85100 Potenza (PZ)
-        </div>
+        {data?.address && (
+          <div className={styles.address}>{data.address}</div>
+        )}
 
-        <div className={styles.bottomCenter}>
-          Startup · PMI · Brand culturali · Professionisti
-        </div>
+        {data?.bottomTags && (
+          <div className={styles.bottomCenter}>
+            {data.bottomTags}
+          </div>
+        )}
 
         <div className={styles.socials}>
-          <a href="#" aria-label="Instagram">
-            <FaInstagram />
-            <span>Instagram</span>
-          </a>
-          <a href="#" aria-label="Facebook">
-            <FaFacebookF />
-            <span>Facebook</span>
-          </a>
-          <a href="#" aria-label="LinkedIn">
-            <FaLinkedinIn />
-            <span>LinkedIn</span>
-          </a>
+          {data?.socials?.map((s, i) => {
+            const Icon = SOCIAL_ICONS[s.type];
+
+            return (
+              <a
+                key={i}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon />
+                <span>{s.type}</span>
+              </a>
+            );
+          })}
         </div>
+
       </div>
 
-      {/* CLICK AREA TO CLOSE */}
       <button
-        aria-label="Chiudi menu"
         className={styles.closeArea}
+        aria-label="Chiudi menu"
         onClick={onClose}
       />
     </div>

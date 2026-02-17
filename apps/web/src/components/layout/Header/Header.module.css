@@ -9,9 +9,60 @@
     backdrop-filter 0.3s var(--ease-standard),
     border-color 0.3s var(--ease-standard);
 }
+
+/* 🔹 micro scintilla bordo inferiore */
+.header::after {
+  content: "";
+  position: absolute;
+  left: -30%;
+  bottom: 0;
+  width: 30%;
+  height: 2px;
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(80,160,255,0.9),
+    transparent
+  );
+
+  opacity: 0;
+  animation: headerSpark 9s ease-in-out infinite;
+}
+
+@keyframes headerSpark {
+  0% {
+    left: -30%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  25% {
+    left: 100%;
+    opacity: 0;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* variante arancio ogni tanto */
+.header.scrolled::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,140,40,0.9),
+    transparent
+  );
+}
+
 :root {
   --header-height: 88px;
 }
+
 @media (max-width: 768px) {
   :root {
     --header-height: 72px;
@@ -40,27 +91,39 @@
 .logo {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 /* MOBILE / BASE */
 .logo img {
   height: auto;
-  max-height: 34px;
   width: auto;
-  transition: transform 0.3s var(--ease-standard),
-    opacity 0.3s var(--ease-standard);
+  transition:
+    transform 0.3s var(--ease-standard),
+    opacity 0.3s var(--ease-standard),
+    filter 0.3s var(--ease-standard);
+
+  /* 🔹 ombra elegante */
+  filter:
+    drop-shadow(0 4px 12px rgba(0,0,0,0.45))
+    drop-shadow(0 0 18px rgba(80,160,255,0.18));
 }
 
 /* DESKTOP */
 @media (min-width: 1024px) {
   .logo img {
-    max-height: 44px;
+    height: 100px;
+    max-height: 60px;
   }
 }
 
 /* MICRO INTERAZIONE */
 .logo:hover img {
-  opacity: 0.85;
+  opacity: 0.9;
+  transform: translateY(-1px);
+  filter:
+    drop-shadow(0 6px 18px rgba(0,0,0,0.55))
+    drop-shadow(0 0 26px rgba(80,160,255,0.28));
 }
 
 /* =========================
@@ -78,16 +141,17 @@
 ========================= */
 
 .cta {
-  font-family:  var(--font-title);
+  font-family: var(--font-title);
   letter-spacing: 0.1em;
   display: none;
   padding: 10px 18px;
   font-size: 0.9rem;
-  border-radius: 999px;
+  border-radius: 1px;
   background: var(--gradient-primary);
   color: #080221;
-  font-weight: 200;
-  transition: transform 0.2s var(--ease-standard),
+  font-weight: 700;
+  transition:
+    transform 0.2s var(--ease-standard),
     box-shadow 0.2s var(--ease-standard);
 }
 
@@ -107,15 +171,16 @@
   gap: 12px;
   height: 44px;
   padding: 0 14px;
-  border-radius: 999px;
+  border-radius: 0px;
   color: var(--color-text);
-  transition: background-color 0.3s var(--ease-standard),
+  transition:
+    background-color 0.3s var(--ease-standard),
     border 0.3s var(--ease-standard);
 }
 
 /* MENU TEXT */
 .menuText {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
@@ -126,8 +191,8 @@
 
 .menuIcon {
   position: relative;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
 }
 
 /* LINEE */
@@ -135,20 +200,24 @@
   position: absolute;
   left: 0;
   right: 0;
+  top: 50%;
   height: 2px;
   background-color: currentColor;
   border-radius: 2px;
-  transition: transform 0.35s var(--ease-standard),
-    background-color 0.35s var(--ease-standard);
+  transform-origin: center;
+  transition:
+    transform 0.4s var(--ease-standard),
+    opacity 0.25s ease,
+    background-color 0.3s var(--ease-standard);
 }
 
 /* STATO CHIUSO */
 .menuIcon span:first-child {
-  top: 6px;
+  transform: translateY(5px);
 }
 
 .menuIcon span:last-child {
-  bottom: 6px;
+  transform: translateY(-5px);
 }
 
 /* =========================
@@ -165,11 +234,11 @@
 }
 
 .menuOpen .menuIcon span:first-child {
-  transform: rotate(45deg) translate(3px, 3px);
+  transform: rotate(45deg);
 }
 
 .menuOpen .menuIcon span:last-child {
-  transform: rotate(-45deg) translate(3px, -3px);
+  transform: rotate(-45deg);
 }
 
 /* =========================

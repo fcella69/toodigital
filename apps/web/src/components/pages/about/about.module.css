@@ -1,0 +1,991 @@
+.mouseGlow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 700px;
+    height: 700px;
+    pointer-events: none;
+    z-index: 1;
+
+    filter: blur(240px);
+    transform: translate(-50%, -50%);
+
+    background: radial-gradient(circle,
+            rgba(80, 160, 255, 0.55) 0%,
+            rgba(80, 160, 255, 0.35) 45%,
+            rgba(80, 160, 255, 0.18) 65%,
+            rgba(255, 122, 24, 0.10) 80%,
+            transparent 85%);
+}
+
+/* =========================================
+   HERO — ABOUT
+========================================= */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  height: 70svh;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.heroInner {
+  position: relative;
+  z-index: 3;
+  max-width: 980px;
+  padding: 0 var(--container-padding);
+  text-align: center;
+}
+
+.heroTitle {
+  font-family: var(--font-title);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+}
+
+.heroSubtitle {
+  margin: 18px auto 0;
+  max-width: 64ch;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+/* NOISE */
+
+.heroNoise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* =========================================
+   INTRO — CHI SIAMO (LIGHT)
+========================================= */
+
+.introSection {
+  background: #ffffff;
+  color: #0f172a;
+  padding: 0;
+}
+
+.introInner {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.introGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+  align-items: stretch;
+}
+
+/* LEFT — CONTENT */
+
+.introContent {
+  padding: 96px clamp(24px, 6vw, 96px);
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.introKicker {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-family: var(--font-title);
+  color: rgba(15, 23, 42, 0.55);
+}
+
+.introTitle {
+  font-family: var(--font-title);
+  font-weight: 650;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  color: #07101f;
+}
+
+.introText {
+  margin-top: 18px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #475569;
+  max-width: 52ch;
+}
+
+/* RIGHT — IMAGE */
+
+.introVisual {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  overflow: hidden;
+}
+
+.introVisual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Se per ora non c'è immagine */
+.introVisualPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    #e5e7eb,
+    #f1f5f9
+  );
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 980px) {
+  .introGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .introContent {
+    padding: 72px 24px;
+    max-width: none;
+  }
+
+  .introVisual {
+    min-height: 320px;
+  }
+}
+
+
+/* =========================================
+   METODO DI LAVORO
+========================================= */
+
+.methodSection {
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 96px 0;
+  overflow: hidden;
+}
+
+/* stato iniziale: animazioni spente */
+.methodSection * {
+  animation: none;
+}
+
+/* =========================================
+   INNER
+========================================= */
+
+.methodInner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.methodHeader {
+  max-width: 60ch;
+  margin-bottom: 64px;
+}
+
+.methodKicker {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-title);
+}
+
+.methodTitle {
+  font-family: var(--font-title);
+  font-weight: 650;
+  font-size: 2.2rem;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================
+   GRID – DESKTOP (SCROLL ORIZZONTALE)
+========================================= */
+
+.methodGrid {
+  position: relative;
+  display: flex;
+  gap: 32px;
+  padding-top: 56px;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 16px; /* spazio per scrollbar */
+}
+
+/* =========================================
+   SCROLLBAR ORIZZONTALE DESKTOP
+========================================= */
+
+@media (min-width: 981px) {
+
+  .methodGrid::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .methodGrid::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+  }
+
+  .methodGrid::-webkit-scrollbar-thumb {
+    background: rgba(80,160,255,0.6);
+    border-radius: 10px;
+    transition: background 0.2s ease;
+  }
+
+  .methodGrid::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,122,24,0.8);
+  }
+
+  /* Firefox */
+  .methodGrid {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(80,160,255,0.6) rgba(255,255,255,0.06);
+  }
+
+}
+
+
+/* =========================================
+   LINEA ORIZZONTALE
+========================================= */
+
+.methodGrid::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(80, 160, 255, 0.35);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.methodCard {
+  position: relative;
+  flex: 0 0 320px;
+  padding: 36px 26px 32px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  scroll-snap-align: start;
+  z-index: 1;
+
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* =========================================
+   PALLINO
+========================================= */
+
+.methodCard::before {
+  content: "";
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(80,160,255,0.95);
+  box-shadow: 0 0 0 6px rgba(80,160,255,0.18);
+}
+
+/* =========================================
+   TESTI
+========================================= */
+
+.methodIndex {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.methodStepTitle {
+  margin-top: 14px;
+  font-family: var(--font-title);
+  font-weight: 650;
+  font-size: 1.2rem;
+}
+
+.methodStepText {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* =========================================
+   ANIMAZIONI (ATTIVE SOLO ON VIEW)
+========================================= */
+
+.methodSection.isVisible .methodGrid::before {
+  animation: lineGrow 1.2s ease forwards;
+}
+
+.methodSection.isVisible .methodCard {
+  animation: cardIn 0.6s ease forwards;
+}
+
+.methodSection.isVisible .methodCard::before {
+  animation: dotIn 0.4s ease forwards;
+}
+
+/* STAGGER CARD */
+.methodSection.isVisible .methodCard:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.methodSection.isVisible .methodCard:nth-child(2) {
+  animation-delay: 0.35s;
+}
+.methodSection.isVisible .methodCard:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.methodSection.isVisible .methodCard:nth-child(4) {
+  animation-delay: 0.85s;
+}
+
+/* STAGGER DOT */
+.methodSection.isVisible .methodCard:nth-child(1)::before {
+  animation-delay: 0.25s;
+}
+.methodSection.isVisible .methodCard:nth-child(2)::before {
+  animation-delay: 0.5s;
+}
+.methodSection.isVisible .methodCard:nth-child(3)::before {
+  animation-delay: 0.75s;
+}
+.methodSection.isVisible .methodCard:nth-child(4)::before {
+  animation-delay: 1s;
+}
+
+/* =========================================
+   KEYFRAMES
+========================================= */
+
+@keyframes cardIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dotIn {
+  to {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@keyframes lineGrow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* =========================================
+   MOBILE – TIMELINE VERTICALE
+========================================= */
+
+@media (max-width: 980px) {
+  .methodGrid {
+    flex-direction: column;
+    overflow-x: visible;
+    padding-top: 0;
+    padding-left: 32px;
+  }
+
+  .methodGrid::before {
+    top: 0;
+    left: 14px;
+    width: 1px;
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  .methodSection.isVisible .methodGrid::before {
+    animation: lineGrowVertical 1.2s ease forwards;
+  }
+
+  .methodCard {
+    flex: none;
+    padding-left: 40px;
+  }
+
+  .methodCard::before {
+    top: 32px;
+    left: -26px;
+    transform: scale(0);
+  }
+
+  @keyframes lineGrowVertical {
+    to {
+      transform: scaleY(1);
+    }
+  }
+}
+
+/* =========================================
+   WHY SECTION
+========================================= */
+
+.whySection {
+  background: #ffffff;
+  color: #0f172a;
+  padding: 110px 0;
+  overflow: hidden;
+}
+
+.whyInner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* =========================================
+   LAYOUT SPLIT
+========================================= */
+
+.whyLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* =========================================
+   LEFT CONTENT
+========================================= */
+
+.whyContent {
+  max-width: 58ch;
+}
+
+.whyKicker {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(15, 23, 42, 0.55);
+  font-family: var(--font-title);
+}
+
+.whyTitle {
+  font-family: var(--font-title);
+  font-weight: 650;
+  font-size: 2.4rem;
+  line-height: 1.1;
+  color: #07101f;
+}
+
+.whyText {
+  margin-top: 18px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #475569;
+}
+
+/* =========================================
+   RIGHT — STACK CAROUSEL
+========================================= */
+
+.whyCarousel {
+  position: relative;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+}
+
+.whyCarousel:active {
+  cursor: grabbing;
+}
+
+.whyStack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================
+   CARD BASE
+========================================= */
+
+.whyCard {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 80%;
+  max-width: 420px;
+  padding: 32px 30px 36px;
+  border-radius: 22px;
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+
+  transform: translate(-50%, -50%) scale(0.85);
+  opacity: 0;
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease,
+    filter 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+/* =========================================
+   ACTIVE CARD (CENTRAL)
+========================================= */
+
+.whyCardActive {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  z-index: 3;
+  box-shadow:
+    0 25px 60px rgba(15, 23, 42, 0.12),
+    0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+/* =========================================
+   PREVIOUS CARD (SOPRA)
+========================================= */
+
+.whyCardPrev {
+  transform: translate(-50%, -130%) scale(0.9);
+  opacity: 0.45;
+  z-index: 2;
+  filter: blur(1px);
+}
+
+/* =========================================
+   NEXT CARD (SOTTO)
+========================================= */
+
+.whyCardNext {
+  transform: translate(-50%, 30%) scale(0.9);
+  opacity: 0.45;
+  z-index: 2;
+  filter: blur(1px);
+}
+
+/* =========================================
+   HIDDEN CARDS
+========================================= */
+
+.whyCardHidden {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.7);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* =========================================
+   CARD CONTENT
+========================================= */
+
+.whyCardTitle {
+  font-family: var(--font-title);
+  font-weight: 650;
+  font-size: 1.2rem;
+  color: #07101f;
+}
+
+.whyCardText {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #475569;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 980px) {
+
+  .whyLayout {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .whyCarousel {
+    height: 340px;
+  }
+
+  .whyCard {
+    width: 90%;
+  }
+
+}
+
+@media (max-width: 640px) {
+
+  .whySection {
+    padding: 90px 0;
+  }
+
+  .whyCarousel {
+    height: 320px;
+  }
+
+  .whyCard {
+    padding: 26px;
+  }
+
+}
+
+/* =========================================
+   VISION
+========================================= */
+
+.visionSection {
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 0;
+  overflow: hidden;
+}
+
+/* LAYOUT SPLIT */
+
+.visionLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 680px;
+}
+
+/* =========================================
+   LEFT — IMAGE FULL HEIGHT
+========================================= */
+
+.visionImage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.visionImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* subtle overlay for depth */
+.visionImage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(7, 16, 31, 0.15),
+    rgba(7, 16, 31, 0.35)
+  );
+}
+
+/* =========================================
+   RIGHT — CONTENT
+========================================= */
+
+.visionContent {
+  padding: 110px var(--container-padding);
+  padding-left: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.visionKicker {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-title);
+}
+
+.visionTitle {
+  font-family: var(--font-title);
+  font-weight: 650;
+  font-size: 2.4rem;
+  line-height: 1.15;
+}
+
+.visionText {
+  margin-top: 18px;
+  max-width: 52ch;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+}
+
+/* =========================================
+   CAROUSEL AREA
+========================================= */
+
+.visionCarousel {
+  position: relative;
+  margin-top: 48px;
+  height: 260px;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.visionCarousel:active {
+  cursor: grabbing;
+}
+
+.visionStack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================
+   CARD BASE
+========================================= */
+
+.visionCard {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 26px 26px 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  transition:
+    transform 0.55s cubic-bezier(.4,.0,.2,1),
+    opacity 0.45s ease,
+    filter 0.45s ease;
+
+  backdrop-filter: blur(8px);
+}
+
+/* =========================================
+   ACTIVE CARD (CENTER)
+========================================= */
+
+.visionCardActive {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  z-index: 3;
+  filter: blur(0);
+}
+
+/* =========================================
+   PREVIOUS CARD (UPPER FADED)
+========================================= */
+
+.visionCardPrev {
+  transform: translateY(-90px) scale(0.94);
+  opacity: 0.35;
+  z-index: 2;
+  filter: blur(1px);
+}
+
+/* =========================================
+   NEXT CARD (LOWER FADED)
+========================================= */
+
+.visionCardNext {
+  transform: translateY(90px) scale(0.94);
+  opacity: 0.35;
+  z-index: 2;
+  filter: blur(1px);
+}
+
+/* =========================================
+   HIDDEN CARDS
+========================================= */
+
+.visionCardHidden {
+  transform: translateY(180px) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================================
+   TEXT
+========================================= */
+
+.visionCardTitle {
+  font-family: var(--font-title);
+  font-weight: 650;
+  font-size: 1.1rem;
+}
+
+.visionCardText {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+  .visionLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .visionImage {
+    height: 380px;
+  }
+
+  .visionContent {
+    padding: 80px var(--container-padding);
+  }
+
+  .visionCarousel {
+    height: 240px;
+  }
+}
+
+@media (max-width: 640px) {
+  .visionTitle {
+    font-size: 2rem;
+  }
+
+  .visionCarousel {
+    height: 220px;
+  }
+}
+
+
+/* =========================================
+   ABOUT CTA (HERO STYLE)
+========================================= */
+
+.ctaSection {
+  position: relative;
+  isolation: isolate;
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 120px 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.ctaInner {
+  position: relative;
+  z-index: 3;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  text-align: center;
+}
+
+.ctaKicker {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-family: var(--font-title);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+.ctaTitle {
+  font-family: var(--font-title);
+  font-weight: 650;
+  font-size: clamp(2.2rem, 4.6vw, 3.8rem);
+  line-height: 1.1;
+}
+
+.ctaSubtitle {
+  margin: 18px auto 0;
+  max-width: 60ch;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.ctaActions {
+  margin-top: 36px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* BUTTONS */
+
+.ctaPrimary {
+  padding: 16px 26px;
+  border-radius: 16px;
+  background: rgba(80,160,255,0.95);
+  color: #07101f;
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease, background 0.2s ease;
+}
+
+.ctaPrimary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  background: rgba(255,122,24,0.95);
+}
+
+.ctaSecondary {
+  padding: 16px 26px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.28);
+  color: #ffffff;
+  font-family: var(--font-title);
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ctaSecondary:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+}

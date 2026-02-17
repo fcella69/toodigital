@@ -68,9 +68,32 @@ export default {
         {
           type: "object",
           fields: [
-            { name: "label", title: "Nome", type: "string" },
-            { name: "url", title: "URL", type: "string" },
+            {
+              name: "type",
+              title: "Social",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Instagram", value: "instagram" },
+                  { title: "Facebook", value: "facebook" },
+                  { title: "LinkedIn", value: "linkedin" },
+                  { title: "X / Twitter", value: "twitter" },
+                ],
+                layout: "radio",
+              },
+            },
+            {
+              name: "url",
+              title: "URL",
+              type: "url",
+            },
           ],
+          preview: {
+            select: {
+              title: "type",
+              subtitle: "url",
+            },
+          },
         },
       ],
     },
