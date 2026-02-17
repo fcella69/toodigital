@@ -9,8 +9,18 @@ import WebTech from "@/components/pages/web/WebTech";
 import WebStandard from "@/components/pages/web/WebStandard";
 import WebCTA from "@/components/pages/web/WebCTA";
 
+type WebPageData = {
+  hero: any;
+  intro: any;
+  services: any;
+  performance: any;
+  tech: any;
+  standard: any;
+  cta: any;
+};
+
 export default async function WebPage() {
-  const data = await sanityFetch(webQuery);
+  const data = await sanityFetch<WebPageData>(webQuery);
 
   return (
     <main>

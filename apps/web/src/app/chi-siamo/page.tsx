@@ -14,9 +14,18 @@ export const metadata = {
     "Scopri chi è Too Digital, il nostro approccio e la visione che guida i nostri progetti digitali.",
 };
 
-export default async function AboutPage() {
-  const data = await sanityFetch(aboutQuery);
+type AboutPageData = {
+  hero: any;
+  intro: any;
+  method: any;
+  why: any;
+  vision: any;
+  cta: any;
+};
 
+
+export default async function AboutPage() {
+  const data = await sanityFetch<AboutPageData>(aboutQuery);
   
   return (
     <main>
