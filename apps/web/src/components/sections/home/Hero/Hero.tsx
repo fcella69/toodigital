@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, ReactNode } from "react";
 import gsap from "gsap";
 import styles from "./Hero.module.css";
 import {
@@ -49,7 +49,7 @@ const FALLBACK = {
    SOCIAL ICON MAP
 ========================= */
 
-const SOCIAL_ICONS: Record<HeroSocial["type"], JSX.Element> = {
+const SOCIAL_ICONS: Record<HeroSocial["type"], React.ReactNode> = {
   linkedin: <FaLinkedinIn />,
   instagram: <FaInstagram />,
   facebook: <FaFacebookF />,
