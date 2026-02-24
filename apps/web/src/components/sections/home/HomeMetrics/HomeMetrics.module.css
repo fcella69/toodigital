@@ -1,0 +1,180 @@
+/* =========================================
+   SECTION
+========================================= */
+
+.section {
+  background: #ffffff;
+  padding: 50px 0;
+}
+
+.inner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* =========================================
+   LAYOUT GRID
+========================================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 10px;
+  align-items: center;
+}
+
+/* =========================================
+   LEFT CONTENT
+========================================= */
+
+.kicker {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-family: var(--font-title);
+  font-weight: 600;
+  color: rgba(15,23,42,0.5);
+}
+
+.title {
+  font-family: var(--font-title);
+  font-weight: 750;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.subtitle {
+  margin-top: 16px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #475569;
+  max-width: 48ch;
+}
+
+/* =========================================
+   RIGHT METRICS BOX
+========================================= */
+
+.metricsBox {
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 45px;
+  border: 1px solid rgba(15,23,42,0.08);
+
+  box-shadow:
+    0 20px 60px rgba(15,23,42,0.06),
+    0 4px 12px rgba(15,23,42,0.04);
+
+  transition: all 0.5s ease;
+}
+
+.metricsBox.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================
+   MAIN METRIC
+========================================= */
+
+.mainMetric {
+  background: linear-gradient(
+    135deg,
+    rgba(80,160,255,0.08),
+    rgba(80,160,255,0.02)
+  );
+
+  border: 1px solid rgba(80,160,255,0.25);
+  border-radius: 22px;
+
+  padding: 35px 25px;
+  text-align: center;
+}
+
+.mainValue {
+  font-family: var(--font-title);
+  font-size: clamp(3.8rem, 6vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--color-primary);
+}
+
+.mainLabel {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #0f172a;
+  opacity: 0.85;
+}
+/* =========================================
+   SECONDARY METRICS
+========================================= */
+
+.secondaryGrid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* =========================================
+   SECONDARY METRIC CARD
+========================================= */
+
+.metricItem {
+  background: #f8fafc;
+  border: 1px solid rgba(15,23,42,0.06);
+  border-radius: 18px;
+  padding: 22px 18px;
+  text-align: center;
+
+  transition: all 0.3s ease;
+}
+
+.metricItem:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(15,23,42,0.08);
+}
+
+.metricValue {
+  font-family: var(--font-title);
+  font-weight: 750;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.metricLabel {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .subtitle {
+    max-width: 100%;
+  }
+
+  .secondaryGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .secondaryGrid {
+    grid-template-columns: 1fr;
+  }
+}

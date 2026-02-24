@@ -6,6 +6,13 @@ export default defineType({
     type: "document",
 
     fields: [
+
+        {
+            name: "seo",
+            title: "SEO",
+            type: "seo",
+        },
+        
         /* ================= HERO ================= */
         defineField({
             name: "hero",

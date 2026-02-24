@@ -1,0 +1,150 @@
+.section {
+    background: var(--color-bg);
+    color: var(--color-text);
+    padding: 110px 0;
+}
+
+.inner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.9s ease;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* TEXT */
+
+.kicker {
+    display: inline-block;
+    margin-bottom: 14px;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: var(--font-title);
+}
+
+.title {
+    font-family: var(--font-title);
+    font-weight: 650;
+    font-size: 2.4rem;
+    line-height: 1.15;
+}
+
+.text {
+    margin-top: 18px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    max-width: 60ch;
+}
+
+/* =========================
+   MEDIA WRAPPER
+========================= */
+
+.media {
+  position: relative;
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+/* leggero effetto hover premium */
+.media:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 60px 120px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.mediaInner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+/* =========================
+   RATIO 16:9 CORRETTO
+========================= */
+
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+/* =========================
+   IMAGE
+========================= */
+
+.image {
+  object-fit: cover;
+}
+
+/* =========================
+   VIDEO / IFRAME
+========================= */
+
+.videoWrapper iframe,
+.videoWrapper video,
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* =========================
+   GLASS OVERLAY GLOW
+========================= */
+
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    rgba(80,160,255,0.15) 0%,
+    transparent 40%,
+    rgba(0,0,0,0.35) 100%
+  );
+
+  mix-blend-mode: overlay;
+}
+
+
+
+/* RESPONSIVE */
+
+@media (max-width: 980px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}

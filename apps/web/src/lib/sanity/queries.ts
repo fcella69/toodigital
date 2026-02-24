@@ -1,19 +1,96 @@
 import { groq } from "next-sanity";
 
-export const homeHeroQuery = groq`
-  *[_type == "home"][0]{
-    hero {
+export const homeQuery = groq`
+*[_type == "home"][0]{
+
+seo{
+  title,
+  description,
+  noIndex,
+  ogImage{
+    asset->{url},
+    alt
+  }
+},
+
+  hero {
+    title,
+    subtitle,
+    ctaLabel,
+    socials[] {
+      label,
+      url,
+      type
+    }
+  },
+
+  services {
+    kicker,
+    title,
+    subtitle,
+    items[] {
       title,
-      subtitle,
-      ctaLabel,
-      socials[] {
-        label,
-        url,
-        type
+      text,
+      slug,
+      image {
+        asset->{
+          url
+        },
+        alt
       }
     }
+  },
+
+showcase {
+  kicker,
+  title,
+  text,
+  media {
+    type,
+    image {
+      asset->{
+        url
+      }
+    },
+    videoUrl
   }
+},
+
+metrics {
+  kicker,
+  title,
+  subtitle,
+  mainValue,
+  mainLabel,
+  items[] {
+    value,
+    label
+  }
+},
+
+cta {
+  kicker,
+  title,
+  text,
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
+
+  backgroundImage {
+    asset->{ url },
+    alt
+  },
+
+  image {
+    asset->{ url },
+    alt
+  }
+}
+  
+}
 `;
+
 
 export const headerQuery = groq`
   *[_type == "header"][0]{
@@ -26,7 +103,10 @@ export const headerQuery = groq`
       label,
       link
     },
-    menuRightTitle,
+    menuRightTitle{
+      label,
+      link
+    },
     menuRight[]{
       label,
       link
@@ -42,6 +122,16 @@ export const headerQuery = groq`
 
 export const careersQuery = groq`
   *[_type == "careers"][0]{
+seo{
+  title,
+  description,
+  noIndex,
+  ogImage{
+    asset->{url},
+    alt
+  }
+},
+
     hero {
       title,
       subtitle
@@ -55,13 +145,24 @@ export const careersQuery = groq`
         regions
       },
       privacyText,
-      submitLabel
+      submitLabel,
     }
   }
 `;
 
 export const contactsQuery = `
 *[_type == "contactsPage"][0]{
+
+seo{
+  title,
+  description,
+  noIndex,
+  ogImage{
+    asset->{url},
+    alt
+  }
+},
+
   hero {
     title,
     subtitle
@@ -140,6 +241,17 @@ export const contactsQuery = `
 
 export const aboutQuery = `
 *[_type == "aboutPage"][0]{
+
+seo{
+  title,
+  description,
+  noIndex,
+  ogImage{
+    asset->{url},
+    alt
+  }
+},
+
   hero {
     title,
     subtitle
@@ -182,73 +294,117 @@ export const aboutQuery = `
 }
 `;
 
+export const servicesQuery = `
+*[_type == "servicesPage"][0]{
 
-export const webQuery = `
-*[_type == "webPage"][0]{
+seo{
+  title,
+  description,
+  noIndex,
+  ogImage{
+    asset->{url},
+    alt
+  }
+},
+
   hero{
     title,
     subtitle
   },
-  intro{
+
+  web{
+    navTitle,
     kicker,
     title,
     text,
-    "image": image.asset->url
+    image{ asset->{url} },
+    technologies[]{ asset->{url} },
+    siteTypes[]{ title, description },
+    cta{ title, text, buttonLabel, buttonLink }
   },
-  services{
-  kicker,
-  title,
-  text,
-  items[]{
+
+  brand{
+    navTitle,
+    kicker,
     title,
-    text
-    },
+    text,
+    image{ asset->{url} },
+    platforms[]{ asset->{url} },
+    services[]{ title, description, bullets },
+    metrics[]{ value, suffix, label },
+    cta{ title, text, buttonLabel, buttonLink }
   },
-  performance{
+
+growth{
+  navTitle,
   kicker,
   title,
   text,
-  metrics[]{
-    value,
-    suffix,
-    label
-  },
-  points[]{
-    text
-  }
-},
-tech{
-  kicker,
-  title,
-  text,
-  items[]{
-    name,
-    category,
-    description
-  }
-},
-standard{
-  kicker,
-  title,
-  text,
-  items[]{
+  image{ asset->{url}, alt },
+
+  showcaseKicker,
+  showcaseTitle,
+  showcase[]{ asset->{url}, alt },
+
+  identityKicker,
+  identityTitle,
+  identity[]{
     title,
-    text
+    text,
+    icon{ asset->{url}, alt }
+  },
+
+  cta{
+    title,
+    text,
+    buttonLabel,
+    buttonLink
   }
 },
-cta {
+
+consulting{
+  navTitle,
   kicker,
   title,
-  subtitle,
-  primaryLabel,
-  primaryHref,
-  secondaryLabel,
-  secondaryHref
+  text,
+  image{ asset->{url}, alt },
+
+  processKicker,
+  processTitle,
+  process[]{ title, text },
+
+  typesKicker,
+  typesTitle,
+  types[]{ title, text },
+
+  cta{ title, text, buttonLabel, buttonLink }
 }
-
-
 }
 `;
 
+
+export const settingsQuery = groq`
+  *[_type == "settings"][0]{
+    siteName,
+    seoTitle,
+    seoDescription,
+    favicon{
+      asset->{url},
+      alt
+    }
+  }
+`;
+
+export const footerQuery = `
+*[_type == "footerSettings"][0]{
+  logo{ asset->{url}, alt },
+  tagline,
+  menuLinks[]{ label, href },
+  extraLinks[]{ label, href },
+  policyLinks[]{ label, href },
+  socialLinks[]{ platform, url },
+  copyrightText
+}
+`;
 
 

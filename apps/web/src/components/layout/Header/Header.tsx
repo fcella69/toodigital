@@ -18,7 +18,7 @@ export type HeaderData = {
     };
   };
   menuLeft?: { label: string; link: string }[];
-  menuRightTitle?: string;
+  menuRightTitle?: { label: string; link: string };
   menuRight?: { label: string; link: string }[];
   address?: string;
   bottomTags?: string;

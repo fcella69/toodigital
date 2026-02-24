@@ -5,6 +5,13 @@ export default {
   type: "document",
 
   fields: [
+
+    {
+      name: "seo",
+      title: "SEO",
+      type: "seo",
+    },
+
     /* =========================
        HERO
     ========================= */
@@ -93,6 +100,14 @@ export default {
           type: "string",
           initialValue: "Invia candidatura",
         },
+
+        {
+          name: "applicationEmails",
+          title: "Email destinatari candidature",
+          type: "array",
+          of: [{ type: "string" }]
+        },
+
       ],
     },
   ],

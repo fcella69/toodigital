@@ -19,12 +19,10 @@
   "dependencies": {
     "gsap": "^3.14.2",
     "lucide-react": "^0.563.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "resend": "^6.9.2"
   },
   "engines": {
     "node": ">=18 <21"
   }
-
 }
-
-

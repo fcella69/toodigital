@@ -12,9 +12,19 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "siteUrl",
-      title: "Site URL",
-      type: "url",
+      name: "favicon",
+      title: "Favicon",
+      type: "image",
+      options: {
+        hotspot: false,
+      },
+      fields: [
+        {
+          name: "alt",
+          title: "Alt",
+          type: "string",
+        },
+      ],
     }),
     defineField({
       name: "seoTitle",

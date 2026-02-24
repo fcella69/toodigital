@@ -148,7 +148,9 @@ export default function FullscreenMenu({
         <div ref={rightRef} className={styles.right}>
           {data?.menuRightTitle && (
             <span className={styles.sectionTitle}>
-              {data.menuRightTitle}
+              <a href={data?.menuRightTitle?.link}>
+                {data?.menuRightTitle?.label}
+              </a>
             </span>
           )}
 

@@ -9,7 +9,7 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 import { HiOutlineArrowDown } from "react-icons/hi";
-
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import GridBackground from "@/components/ui/GridBackground/GridBackground";
 
 
@@ -73,6 +73,8 @@ export default function Hero({ hero }: HeroProps) {
   ========================= */
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollToPlugin);
+
     const tl = gsap.timeline({ delay: 0.25 });
 
     tl.from(titleRef.current, {
@@ -126,13 +128,19 @@ export default function Hero({ hero }: HeroProps) {
     };
   }, []);
 
- 
-
 
   const scrollNext = () => {
-    document
-      .querySelector("#next-section")
-      ?.scrollIntoView({ behavior: "smooth" });
+    const next = document.getElementById("home-services");
+    if (!next) return;
+
+    const top =
+      next.getBoundingClientRect().top + window.scrollY;
+
+    gsap.to(window, {
+      scrollTo: top,
+      duration: 1.2,
+      ease: "power3.inOut",
+    });
   };
 
   return (
@@ -160,9 +168,14 @@ export default function Hero({ hero }: HeroProps) {
         ref={ctaRef}
         onClick={scrollNext}
         className={styles.scrollButton}
+        type="button"
       >
-        <span>{data.ctaLabel}</span>
-        <HiOutlineArrowDown className={styles.scrollIcon} />
+        <span className={styles.scrollBg} />
+
+        <span className={styles.scrollContent}>
+          <span>{data.ctaLabel}</span>
+          <HiOutlineArrowDown className={styles.scrollIcon} />
+        </span>
       </button>
 
       {/* SOCIALS */}

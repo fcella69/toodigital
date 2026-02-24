@@ -70,28 +70,28 @@
   left: 0;
   bottom: 0;
 
-  width: min(48vw, 720px);
-
-  font-family: var(--font-title);
-  font-weight: 800;
-
-  display: flex;
-  align-items: center;
-  justify-content: center; /* ✅ centratura reale */
-
-  gap: 18px;
-
-  padding: 28px 0;
-
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-
-  color: #ffffff;
-  background-color: #1f3f72;
+  width: min(48vw, 750px);
+  height: 75px;
 
   border: none;
   cursor: pointer;
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  z-index: 5;
+}
+
+/* BACKGROUND TRAPEZIO */
+.scrollBg {
+  position: absolute;
+  inset: 0;
+
+  background-color: #1f3f72;
 
   clip-path: polygon(
     0 0,
@@ -100,14 +100,32 @@
     0 100%
   );
 
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease;
+  transition: background-color 0.25s ease;
+  z-index: 0;
 }
 
+/* CONTENUTO */
+.scrollContent {
+  position: relative;
+  z-index: 1;
 
-.scrollButton:hover {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.scrollButton:hover .scrollBg {
   background-color: var(--color-primary);
+}
+
+.scrollButton:hover .scrollContent {
   color: #000;
 }
 
@@ -282,6 +300,7 @@
   }
 
   .socials {
+    margin-bottom: 20px;
     bottom: 72px; /* sopra la CTA */
     right: 50%;
     transform: translateX(50%);

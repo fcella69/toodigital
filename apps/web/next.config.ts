@@ -5,8 +5,14 @@ const nextConfig: NextConfig = {
     optimizeCss: false, // disabilita lightningcss
   },
   images: {
-  domains: ["cdn.sanity.io"],
-},
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+    ],
+  },
+
 };
 
 export default nextConfig;

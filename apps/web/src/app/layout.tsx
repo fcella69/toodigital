@@ -3,10 +3,19 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 import Header from "@/components/layout/Header/Header";
-import { sanityFetch } from "@/lib/sanity/fetch";
-import { headerQuery } from "@/lib/sanity/queries";
+import Footer from "@/components/layout/Footer/Footer";
 
-// FONT CONFIG
+import { sanityFetch } from "@/lib/sanity/fetch";
+import {
+  headerQuery,
+  footerQuery,
+  settingsQuery,
+} from "@/lib/sanity/queries";
+
+/* =========================
+   FONT CONFIG
+========================= */
+
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-title",
@@ -21,20 +30,48 @@ const inter = Inter({
   display: "swap",
 });
 
-// METADATA BASE
-export const metadata: Metadata = {
-  title: "Too Digital — Esperti in transizione digitale",
-  description:
-    "Too Digital è una web company specializzata in soluzioni digitali, piattaforme web e strategie di trasformazione digitale per aziende strutturate.",
-};
+/* =========================
+   GLOBAL METADATA (Server)
+========================= */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await sanityFetch<any>(settingsQuery);
+
+  const siteName = settings?.siteName || "Too Digital";
+  const defaultTitle = settings?.seoTitle || siteName;
+  const defaultDescription = settings?.seoDescription || undefined;
+  const faviconUrl = settings?.favicon?.asset?.url;
+
+  return {
+
+    title: {
+      default: defaultTitle,
+      template: `%s | ${siteName}`,
+    },
+
+    description: defaultDescription,
+
+    icons: faviconUrl
+      ? {
+          icon: faviconUrl,
+          shortcut: faviconUrl,
+          apple: faviconUrl,
+        }
+      : undefined,
+  };
+}
+
+/* =========================
+   ROOT LAYOUT
+========================= */
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // ✅ FETCH SERVER-SIDE (NO CORS)
   const headerData = await sanityFetch<any>(headerQuery);
+  const footerData = await sanityFetch<any>(footerQuery);
 
   return (
     <html
@@ -42,10 +79,14 @@ export default async function RootLayout({
       className={`${jakarta.variable} ${inter.variable}`}
     >
       <body>
-        {/* HEADER CLIENT + DATI SERVER */}
         <Header data={headerData} />
 
-        {children}
+        {/* WRAPPER NECESSARIO PER FOOTER REVEAL */}
+        <div className="pageContent">
+          {children}
+        </div>
+
+        <Footer data={footerData} />
       </body>
     </html>
   );

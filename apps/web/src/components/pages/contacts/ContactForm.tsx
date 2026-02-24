@@ -75,14 +75,25 @@ export default function ContactForm({ config }: Props) {
             : DEFAULT_SERVICES;
 
 
-    const onSubmit = async (e: React.FormEvent) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+
         setStatus("sending");
 
-        await new Promise((r) => setTimeout(r, 800));
+        const res = await fetch("/api/contact", {
+            method: "POST",
+            body: formData,
+        });
 
-        setStatus("sent");
-        setTimeout(() => setStatus("idle"), 2000);
+        if (res.ok) {
+            setStatus("sent");
+            e.currentTarget.reset();
+            setTimeout(() => setStatus("idle"), 2000);
+        } else {
+            setStatus("idle");
+        }
     };
 
     return (
@@ -159,6 +170,12 @@ export default function ContactForm({ config }: Props) {
                     <span>{privacyText}</span>
                 </label>
             )}
+
+            <input
+                type="text"
+                name="website"
+                style={{ display: "none" }}
+            />
 
             <button type="submit" disabled={status !== "idle"}>
                 {status === "sending"

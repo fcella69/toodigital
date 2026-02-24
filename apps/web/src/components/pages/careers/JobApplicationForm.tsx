@@ -76,20 +76,44 @@ export default function JobApplicationForm({
 
     setStatus("sending");
 
-    // TODO: collegare API / Server Action
-    await new Promise((r) => setTimeout(r, 650));
+    try {
+      const body = new FormData();
+      body.append("name", form.name);
+      body.append("surname", form.surname);
+      body.append("email", form.email);
+      body.append("region", selectedRegion);
+      body.append("role", form.role);
+      body.append("message", form.message);
 
-    setStatus("sent");
+      if (cvFile) {
+        body.append("cv", cvFile);
+      }
 
-    setForm((p) => ({
-      ...p,
-      role: "",
-      message: "",
-      privacy: false,
-    }));
-    setCvFile(null);
+      const res = await fetch("/api/job-application", {
+        method: "POST",
+        body,
+      });
 
-    setTimeout(() => setStatus("idle"), 1800);
+      if (!res.ok) throw new Error("Errore invio");
+
+      setStatus("sent");
+
+      setForm({
+        name: "",
+        surname: "",
+        email: "",
+        role: "",
+        message: "",
+        privacy: false,
+      });
+
+      setCvFile(null);
+
+      setTimeout(() => setStatus("idle"), 2000);
+    } catch (err) {
+      console.error(err);
+      setStatus("idle");
+    }
   };
 
   return (
@@ -236,6 +260,12 @@ export default function JobApplicationForm({
           <span>{formConfig.privacyText}</span>
         </label>
 
+        <input
+          type="text"
+          name="website"
+          style={{ display: "none" }}
+        />
+
         <button
           className={styles.submit}
           type="submit"
@@ -244,8 +274,8 @@ export default function JobApplicationForm({
           {status === "sending"
             ? "Invio..."
             : status === "sent"
-            ? "Inviato ✓"
-            : formConfig.submitLabel ?? "Invia candidatura"}
+              ? "Inviato ✓"
+              : formConfig.submitLabel ?? "Invia candidatura"}
         </button>
 
         {!selectedRegion && (

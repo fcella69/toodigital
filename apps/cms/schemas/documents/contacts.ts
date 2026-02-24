@@ -6,6 +6,13 @@ export default defineType({
     type: "document",
 
     fields: [
+
+        {
+            name: "seo",
+            title: "SEO",
+            type: "seo",
+        },
+
         /* ================= HERO ================= */
         defineField({
             name: "hero",
@@ -206,6 +213,15 @@ export default defineType({
                     type: "string",
                     initialValue: "Invia richiesta",
                 }),
+                defineField(
+                    {
+                        name: "contactEmails",
+                        title: "Email destinatari richieste",
+                        type: "array",
+                        of: [{ type: "string" }]
+                    }
+                ),
+
             ],
         }),
     ],

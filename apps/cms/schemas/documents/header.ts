@@ -27,9 +27,12 @@ export default {
 
     {
       name: "menuRightTitle",
-      title: "Titolo menu destro",
-      type: "string",
-      initialValue: "Comunicazione",
+      title: "Titolo Colonna Destra",
+      type: "object",
+      fields: [
+        { name: "label", type: "string", title: "Testo" },
+        { name: "link", type: "string", title: "Link" }
+      ]
     },
 
     {

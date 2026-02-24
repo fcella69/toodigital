@@ -1,0 +1,1577 @@
+/* =========================================
+   MOUSE GLOW
+========================================= */
+
+.mouseGlow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 700px;
+    height: 700px;
+    pointer-events: none;
+    z-index: 1;
+
+    filter: blur(240px);
+    transform: translate(-50%, -50%);
+
+    background: radial-gradient(circle,
+            rgba(80, 160, 255, 0.55) 0%,
+            rgba(80, 160, 255, 0.35) 45%,
+            rgba(80, 160, 255, 0.18) 65%,
+            rgba(255, 122, 24, 0.10) 80%,
+            transparent 85%);
+}
+
+/* =========================================
+   SERVICES WRAPPER
+========================================= */
+
+.servicesArea {
+    position: relative;
+    background: #0B0E17;
+}
+
+.servicesBg {
+    position: absolute;
+    inset: 0;
+    background: #eef1f5;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.servicesContent {
+    position: relative;
+    z-index: 1;
+}
+
+.stackSection {
+    position: relative;
+    z-index: 1;
+    will-change: transform, opacity;
+}
+
+/* =========================================
+   HERO — SERVICES
+========================================= */
+
+.hero {
+    position: relative;
+    isolation: isolate;
+    height: 100svh;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg);
+    color: var(--color-text);
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.heroInner {
+    position: relative;
+    z-index: 3;
+    max-width: 980px;
+    padding: 0 var(--container-padding);
+    text-align: center;
+}
+
+.heroTitle {
+    font-family: var(--font-title);
+    font-weight: 650;
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+    font-size: clamp(2.4rem, 5vw, 4.6rem);
+}
+
+.heroSubtitle {
+    margin: 18px auto 0;
+    max-width: 64ch;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+}
+
+/* NOISE */
+
+.heroNoise {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    z-index: 2;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* =========================================
+   SERVICES AREA
+========================================= */
+
+.servicesArea {
+    position: relative;
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+.servicesStack {
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   STICKY NAV — PREMIUM + PROGRESS
+========================================= */
+
+.stickyNav {
+    position: sticky;
+    top: var(--header-height, 84px);
+    z-index: 60;
+
+    /* più leggibile: meno trasparenza */
+    background: rgba(10, 13, 20, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow:
+        0 14px 40px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.stickyNavInner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 14px var(--container-padding);
+
+    display: grid;
+    grid-template-columns: 52px 1fr 52px;
+    align-items: center;
+    gap: 18px;
+}
+
+/* titolo più “chiaro” e più grande */
+.navTitleWrap {
+    text-align: center;
+    overflow: hidden;
+}
+
+.navTitle {
+    display: inline-block;
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 0.86rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+
+    color: rgba(255, 255, 255, 0.94);
+
+    text-shadow:
+        0 0 18px rgba(80, 160, 255, 0.10),
+        0 8px 22px rgba(0, 0, 0, 0.55);
+}
+
+/* frecce più premium */
+.navArrow {
+    width: 52px;
+    height: 42px;
+    border-radius: 999px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.03) 100%);
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.95);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease,
+        opacity 0.18s ease;
+}
+
+.navArrow svg {
+    font-size: 22px;
+}
+
+.navArrow:hover {
+    transform: translateY(-1px);
+    border-color: rgba(80, 160, 255, 0.34);
+    box-shadow:
+        0 16px 36px rgba(0, 0, 0, 0.55),
+        0 0 0 4px rgba(80, 160, 255, 0.10);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.navArrow:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.navArrow:disabled {
+    opacity: 0.28;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* progress line */
+.progressTrack {
+    height: 3px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.progressBar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,
+            rgba(80, 160, 255, 0.95) 0%,
+            rgba(80, 160, 255, 0.75) 45%,
+            rgba(255, 122, 24, 0.78) 75%,
+            rgba(255, 122, 24, 0.95) 100%);
+    box-shadow: 0 0 18px rgba(80, 160, 255, 0.22);
+    transition: width 0.12s linear;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+    .stickyNavInner {
+        grid-template-columns: 46px 1fr 46px;
+        padding: 12px var(--container-padding);
+        gap: 14px;
+    }
+
+    .navArrow {
+        width: 46px;
+        height: 40px;
+    }
+
+    .navTitle {
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+    }
+}
+
+/* =========================================
+   SERVICE SECTIONS
+========================================= */
+
+.serviceSection {
+    padding: 110px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+}
+
+.serviceInner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 70px;
+}
+
+/* Effetto "passaggio": di base un po' attenuato */
+.serviceContent {
+    opacity: 0.72;
+    transform: translateY(10px);
+    filter: blur(0.6px);
+    transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
+}
+
+.serviceMedia {
+    position: relative;
+    height: 420px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 50px 110px rgba(0, 0, 0, 0.45);
+    opacity: 0.78;
+    transform: translateY(10px) scale(0.99);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.serviceImage {
+    object-fit: cover;
+}
+
+.isActive .serviceContent {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+.isActive .serviceMedia {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.serviceKicker {
+    display: inline-block;
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(80, 160, 255, 0.85);
+}
+
+.serviceTitle {
+    margin-top: 16px;
+    font-family: var(--font-title);
+    font-weight: 650;
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+    font-size: clamp(1.9rem, 3.5vw, 3rem);
+}
+
+.serviceText {
+    margin-top: 18px;
+    max-width: 62ch;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+}
+
+.bullets {
+    margin-top: 22px;
+    padding-left: 18px;
+    color: rgba(255, 255, 255, 0.86);
+}
+
+.bullets li {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+/* MOBILE */
+
+@media (max-width: 980px) {
+    .serviceSection {
+        padding: 90px 0;
+    }
+
+    .serviceInner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .serviceMedia {
+        height: 320px;
+    }
+}
+
+/* =========================================
+   SERVICE WEB
+========================================= */
+
+.serviceWeb {
+    background: #ffffff;
+    color: #111;
+}
+
+/* INTRO */
+
+.webIntro {
+    padding: 120px 0 100px;
+}
+
+.webIntroInner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.webKicker {
+    display: inline-block;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #1f3f72;
+}
+
+.webTitle {
+    margin-top: 18px;
+    font-family: var(--font-title);
+    color: #0B0E17;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+}
+
+.webText {
+    margin-top: 24px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #555;
+    max-width: 60ch;
+}
+
+.webImageWrapper {
+    position: relative;
+    height: 420px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.18);
+}
+
+.webImage {
+    object-fit: cover;
+}
+
+/* =========================================
+   TECHNOLOGIES SLIDER — STABLE VERSION
+========================================= */
+
+.webTechSection {
+    background: #0B0E17;
+    padding: 120px 0;
+}
+
+.webTechContainer {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.webTechViewport {
+    overflow: hidden;
+    width: 100%;
+}
+
+.webTechSlider {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+}
+
+.webTechSlider::-webkit-scrollbar {
+    display: none;
+}
+
+.webTechCard {
+    flex: 0 0 260px;
+    scroll-snap-align: start;
+
+    height: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+    border-radius: 26px;
+
+    box-shadow:
+        0 35px 100px rgba(0, 0, 0, 0.45),
+        0 10px 30px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+@media (max-width: 768px) {
+
+    .webTechContainer {
+        gap: 16px;
+    }
+
+    .webTechSlider {
+        gap: 16px;
+    }
+
+    .webTechCard {
+        flex: 0 0 100%;
+        height: 130px;
+    }
+
+}
+
+.webTechCard:hover {
+    transform: translateY(-10px);
+    box-shadow:
+        0 60px 160px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(80, 160, 255, 0.45);
+}
+
+.techImage {
+    object-fit: contain;
+}
+
+/* ARROWS */
+
+.techArrow {
+    width: 60px;
+    height: 48px;
+
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.06),
+            rgba(255, 255, 255, 0.02));
+
+    color: #ffffff;
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+.techArrow:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 0 35px rgba(80, 160, 255, 0.45);
+}
+
+/* =========================================
+   ARROWS — KERNING STYLE
+========================================= */
+
+.techArrow {
+    width: 60px;
+    height: 48px;
+
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.06),
+            rgba(255, 255, 255, 0.02));
+
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+.techArrow:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.12),
+            rgba(255, 255, 255, 0.04));
+
+    box-shadow:
+        0 0 35px rgba(80, 160, 255, 0.45);
+}
+
+.techArrow:active {
+    transform: scale(0.95);
+}
+
+/* =========================================
+   WEB CARDS — PREMIUM BLUE GRADIENT
+========================================= */
+
+.webCardsSection {
+    background: #ffffff;
+    padding: 160px 0;
+}
+
+.webCardsInner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+}
+
+.webCard {
+    padding: 70px 55px;
+
+    background: linear-gradient(160deg,
+            #1c3762 0%,
+            #152542 40%,
+            #0B0E17 100%);
+
+    border-radius: 26px;
+    color: #ffffff;
+
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+
+    box-shadow:
+        0 40px 120px rgba(0, 0, 0, 0.35);
+}
+
+/* subtle light gradient overlay */
+.webCard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left,
+            rgba(80, 160, 255, 0.25),
+            transparent 60%);
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.webCard h3 {
+    font-family: var(--font-title);
+    font-size: 1.4rem;
+    margin-bottom: 22px;
+}
+
+.webCard p {
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.webCard:hover {
+    transform: translateY(-14px);
+    box-shadow:
+        0 60px 160px rgba(0, 0, 0, 0.45),
+        0 0 60px rgba(80, 160, 255, 0.45);
+}
+
+/* MOBILE */
+
+@media (max-width: 980px) {
+    .webIntroInner {
+        grid-template-columns: 1fr;
+    }
+
+    .webImageWrapper {
+        height: 320px;
+    }
+
+    .webCardsInner {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   WEB CTA SECTION
+========================================= */
+
+.webCtaSection {
+    background: #0B0E17;
+    padding: 50px 0;
+    position: relative;
+}
+
+.webCtaInner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 80px;
+
+    background: linear-gradient(160deg,
+            #111827 0%,
+            #0e1524 100%);
+
+    border-radius: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+
+    box-shadow:
+        0 50px 150px rgba(0, 0, 0, 0.5),
+        0 0 80px rgba(80, 160, 255, 0.15);
+}
+
+.webCtaContent h3 {
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.webCtaContent p {
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.7;
+    max-width: 48ch;
+}
+
+.webCtaButton {
+    padding: 18px 36px;
+    border-radius: 2px;
+
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+    background: linear-gradient(135deg,
+            #EE6624,
+            #873e19);
+
+    color: #ffffff;
+    text-decoration: none;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+.webCtaButton:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 0 20px #ee67247a;
+}
+
+@media (max-width: 768px) {
+    .webCtaInner {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 28px;
+    }
+
+    .webCtaSection {
+        padding: 50px 20px;
+    }
+}
+
+/* =========================================
+   BRAND INTRO
+========================================= */
+
+.serviceBrand {
+    background: #ffffff;
+    color: #111;
+    overflow: hidden;
+}
+
+.brandIntro {
+    padding: 120px 0 100px;
+}
+
+.brandIntroInner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: center;
+}
+
+/* MOBILE FIX */
+@media (max-width: 1024px) {
+    .brandIntroInner {
+        grid-template-columns: 1fr;
+    }
+
+    .brandImageWrapper {
+        order: 2;
+        width: 100%;
+    }
+
+    .brandIntroContent {
+        order: 1;
+    }
+}
+
+.brandKicker {
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #1f3f72;
+}
+
+.brandTitle {
+    margin-top: 18px;
+    font-family: var(--font-title);
+    color: #0B0E17;
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.brandText {
+    margin-top: 24px;
+    line-height: 1.8;
+    color: #555;
+}
+
+.brandImageWrapper {
+    position: relative;
+    height: 420px;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.brandImage {
+    object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+
+    .brandImageWrapper {
+        height: 320px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .brandImageWrapper {
+        height: 260px;
+    }
+
+}
+
+/* =========================================
+   PLATFORM CAROUSEL
+========================================= */
+
+.brandPlatforms {
+    background: #0B0E17;
+    padding: 120px 0;
+}
+
+.platformContainer {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.platformViewport {
+    overflow: hidden;
+    width: 100%;
+}
+
+.platformSlider {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+}
+
+.platformSlider::-webkit-scrollbar {
+    display: none;
+}
+
+.platformCard {
+    flex: 0 0 260px;
+    scroll-snap-align: start;
+
+    height: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+    border-radius: 26px;
+
+    box-shadow:
+        0 35px 100px rgba(0, 0, 0, 0.45),
+        0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+    .platformContainer {
+        gap: 16px;
+    }
+
+    .platformSlider {
+        gap: 16px;
+    }
+
+    .platformCard {
+        flex: 0 0 100%;
+        height: 130px;
+    }
+
+}
+
+.platformCard:hover {
+    transform: translateY(-10px);
+    box-shadow:
+        0 60px 160px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(80, 160, 255, 0.45);
+}
+
+.platformImage {
+    object-fit: contain;
+}
+
+/* =========================================
+   BRAND SERVICES — PREMIUM
+========================================= */
+
+.brandServices {
+    padding: 160px 0;
+    background: #ffffff;
+}
+
+.brandServicesInner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 70px;
+}
+
+.brandServiceCard {
+    padding: 60px 50px;
+
+    border-radius: 28px;
+
+    background: linear-gradient(160deg,
+            #d4defb 0%,
+            #eef2f7 100%);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.brandServiceCard:hover {
+    transform: translateY(-12px);
+    box-shadow:
+        0 50px 120px rgba(0, 0, 0, 0.15),
+        0 0 60px rgba(80, 160, 255, 0.25);
+}
+
+.brandServiceCard h3 {
+    font-family: var(--font-title);
+    color: #0B0E17;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.brandServiceCard p {
+    color: #555;
+    margin-bottom: 24px;
+    line-height: 1.7;
+}
+
+.brandServiceCard ul {
+    list-style: none;
+    padding: 0;
+}
+
+.brandServiceCard li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.bulletIcon {
+    color: #1f3f72;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 1024px) {
+    .brandServicesInner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .brandServicesInner {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   METRICS
+========================================= */
+
+.brandMetrics {
+    background: #0B0E17;
+    padding: 140px 0;
+    color: #ffffff;
+}
+
+.brandMetricsInner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+    text-align: center;
+}
+
+.metricValue {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.metricSuffix {
+    font-size: 2rem;
+}
+
+.metricItem p {
+    margin-top: 12px;
+    opacity: 0.7;
+}
+
+@media (max-width: 1024px) {
+    .brandMetricsInner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .brandMetricsInner {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*__________________________________________
+/*__________________________________________
+/*__________________________________________
+/*__________________________________________
+
+/* =========================================
+   GROWTH (Grafica) — STESSO LOOK DI SOCIAL
+========================================= */
+
+.serviceGrowth {
+    background: #ffffff;
+    color: #111;
+    overflow: hidden;
+}
+
+/* INTRO (come brandIntro) */
+.growthIntro {
+    padding: 120px 0 100px;
+}
+
+.growthIntroInner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.growthKicker {
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #1f3f72;
+}
+
+.growthTitle {
+    margin-top: 18px;
+    font-family: var(--font-title);
+    color: #0B0E17;
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.growthText {
+    margin-top: 24px;
+    line-height: 1.8;
+    color: #555;
+}
+
+.growthImageWrapper {
+    position: relative;
+    height: 420px;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.growthImage {
+    object-fit: cover;
+}
+
+/* MOBILE intro */
+@media (max-width: 1024px) {
+    .growthIntroInner {
+        grid-template-columns: 1fr;
+    }
+
+    .growthImageWrapper {
+        order: 2;
+        height: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .growthImageWrapper {
+        height: 260px;
+    }
+}
+
+/* =========================================
+   SHOWCASE CAROUSEL (uguale a platform carousel)
+========================================= */
+
+.growthShowcase {
+    background: #0B0E17;
+    padding: 120px 0;
+}
+
+.growthShowcaseHeader {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding) 24px;
+}
+
+.growthShowcaseKicker {
+    display: inline-block;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.growthShowcaseTitle {
+    margin-top: 10px;
+    font-family: var(--font-title);
+    font-weight: 650;
+    letter-spacing: 0.01em;
+    color: #ffffff;
+    font-size: clamp(1.5rem, 2.2vw, 2.1rem);
+}
+
+.growthShowcaseContainer {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.growthShowcaseViewport {
+    overflow: hidden;
+    width: 100%;
+}
+
+.growthShowcaseSlider {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+}
+
+.growthShowcaseSlider::-webkit-scrollbar {
+    display: none;
+}
+
+.growthShowcaseCard {
+    flex: 0 0 560px;
+    scroll-snap-align: start;
+
+    height: 320px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* ✅ come gli altri caroselli: card bianca */
+    background: #ffffff;
+    border-radius: 26px;
+
+    box-shadow:
+        0 35px 100px rgba(0, 0, 0, 0.45),
+        0 10px 30px rgba(0, 0, 0, 0.25);
+
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+
+    /* ✅ evita “schiacciamenti” */
+    overflow: hidden;
+    position: relative;
+}
+
+.growthShowcaseCard:hover {
+    transform: translateY(-10px);
+    box-shadow:
+        0 60px 160px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(80, 160, 255, 0.45);
+}
+
+.growthShowcaseImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #ffffff;
+    padding: 26px;
+    border-radius: 22px;
+    box-sizing: border-box;
+    display: block;
+}
+
+/* MOBILE carousel */
+@media (max-width: 768px) {
+    .growthShowcaseContainer {
+        gap: 16px;
+    }
+
+    .growthShowcaseSlider {
+        gap: 16px;
+    }
+
+    .growthShowcaseCard {
+        flex: 0 0 100%;
+        height: 240px;
+    }
+}
+
+/* =========================================
+   IDENTITÀ (3 card scure premium)
+========================================= */
+
+.growthIdentity {
+    padding: 160px 0;
+    background: #ffffff;
+}
+
+.growthIdentityInner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.growthIdentityKicker {
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #1f3f72;
+}
+
+.growthIdentityTitle {
+    margin-top: 14px;
+    font-family: var(--font-title);
+    color: #0B0E17;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.growthIdentityGrid {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.growthIdentityCard {
+    padding: 44px 38px;
+    border-radius: 28px;
+    color: #fff;
+
+    background: linear-gradient(160deg, #1c3762 0%, #152542 40%, #0B0E17 100%);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.growthIdentityCard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(80, 160, 255, 0.25), transparent 60%);
+    opacity: 0.85;
+    pointer-events: none;
+}
+
+.growthIdentityCard:hover {
+    transform: translateY(-12px);
+    box-shadow:
+        0 60px 160px rgba(0, 0, 0, 0.45),
+        0 0 60px rgba(80, 160, 255, 0.45);
+}
+
+.growthIdentityIcon {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgb(255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+
+    overflow: hidden;
+}
+
+.growthIdentityIcon :global(img) {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    display: block;
+}
+
+.growthIdentityCardTitle {
+    margin-top: 18px;
+    font-family: var(--font-title);
+    font-size: 1.25rem;
+}
+
+.growthIdentityCardText {
+    margin-top: 14px;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.86);
+}
+
+/* Responsive identity */
+@media (max-width: 1024px) {
+    .growthIdentityGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .growthIdentityGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+/* =========================================
+   SERVICE CONSULTING
+========================================= */
+
+.serviceConsulting {
+    background: #ffffff;
+    color: #111;
+    overflow: hidden;
+}
+
+/* INTRO */
+.consultingIntro {
+    padding: 120px 0 100px;
+}
+
+.consultingIntroInner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.consultingKicker {
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #1f3f72;
+}
+
+.consultingTitle {
+    margin-top: 18px;
+    font-family: var(--font-title);
+    color: #0B0E17;
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.consultingText {
+    margin-top: 24px;
+    line-height: 1.8;
+    color: #555;
+}
+
+.consultingImageWrapper {
+    position: relative;
+    height: 420px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.consultingImage {
+    object-fit: cover;
+}
+
+/* PROCESS */
+.consultingProcess {
+    padding: 140px 0;
+    background: #f4f6f9;
+}
+
+.consultingProcessInner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.consultingProcessGrid {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.consultingSectionTitle {
+    color: #0B0E17;
+}
+
+.consultingSectionKicker {
+    color: #1f3f72;
+}
+
+.consultingProcessCard {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.08);
+}
+
+.consultingProcessCard h4 {
+    margin-top: 14px;
+    font-family: var(--font-title);
+    font-size: 1.25rem;
+    color: #0B0E17;
+
+}
+
+.consultingProcessCard p {
+    margin-top: 12px;
+    line-height: 1.7;
+    color: #555;
+}
+
+.consultingProcessIndex {
+    font-weight: 700;
+    color: #1f3f72;
+    font-size: 1.1rem;
+}
+
+/* TYPES */
+.consultingTypes {
+    padding: 160px 0;
+    background: #0B0E17;
+    color: #ffffff;
+}
+
+.consultingTypesInner {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.consultingTypesGrid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.consultingTypeCard {
+    padding: 50px;
+    border-radius: 28px;
+    background: linear-gradient(160deg, #162544, #0B0E17);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
+
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        border 0.4s ease;
+}
+
+.consultingTypeCard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left,
+            rgba(80, 160, 255, 0.25),
+            transparent 60%);
+    opacity: 0.7;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.consultingTypeCard:hover {
+    transform: translateY(-12px);
+    box-shadow:
+        0 60px 160px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(80, 160, 255, 0.45);
+}
+
+.consultingTypeCard:hover::before {
+    opacity: 1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .consultingIntroInner {
+        grid-template-columns: 1fr;
+    }
+
+    .consultingProcessGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .consultingTypesGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .consultingProcessGrid {
+        grid-template-columns: 1fr;
+    }
+}

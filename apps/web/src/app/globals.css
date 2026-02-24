@@ -26,6 +26,13 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.pageContent {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  min-height: 100vh;
+}
+
 /* =========================
    DESIGN TOKENS
 ========================= */
@@ -45,41 +52,35 @@ body {
   --color-text-muted: #b5bad6;
 
   /* Brand */
-  --color-primary: #ee6224;    /* arancio logo */
+  --color-primary: #ee6224;
+  /* arancio logo */
   --color-primary-soft: #ea8922;
-  --color-secondary: #104a9c;  /* blu logo */
+  --color-secondary: #104a9c;
+  /* blu logo */
 
   /* =========================
      GRADIENTS
   ========================= */
 
   /* Primary accent */
-  --gradient-primary: linear-gradient(
-    135deg,
-    #ee6224 0%,
-    #ea8922 100%
-  );
+  --gradient-primary: linear-gradient(135deg,
+      #ee6224 0%,
+      #ea8922 100%);
 
   /* Blue brand */
-  --gradient-secondary: linear-gradient(
-    135deg,
-    #0c3c80 0%,
-    #104a9c 100%
-  );
+  --gradient-secondary: linear-gradient(135deg,
+      #0c3c80 0%,
+      #104a9c 100%);
 
   /* Subtle depth */
-  --gradient-dark: linear-gradient(
-    180deg,
-    rgba(11, 14, 23, 0) 0%,
-    #0b0e17 100%
-  );
+  --gradient-dark: linear-gradient(180deg,
+      rgba(11, 14, 23, 0) 0%,
+      #0b0e17 100%);
 
   /* Ambient corporate glow */
-  --gradient-ambient: radial-gradient(
-    circle at 20% 15%,
-    rgba(16, 74, 156, 0.18),
-    transparent 60%
-  );
+  --gradient-ambient: radial-gradient(circle at 20% 15%,
+      rgba(16, 74, 156, 0.18),
+      transparent 60%);
 
   /* =========================
      LAYOUT
