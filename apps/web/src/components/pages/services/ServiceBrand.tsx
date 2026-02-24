@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./services.module.css";
 import { HiOutlineArrowRight, HiOutlineArrowLeft } from "react-icons/hi";
@@ -55,11 +55,12 @@ export default function ServiceBrand({
   active,
   setSectionRef,
 }: Props) {
-
   const sliderRef = useRef<HTMLDivElement>(null);
-  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
-  const platforms = service.platforms || [];
+  // ✅ in browser meglio questo rispetto a NodeJS.Timeout
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const platforms = useMemo(() => service.platforms || [], [service.platforms]);
 
   const startAutoplay = () => {
     if (!sliderRef.current) return;
@@ -70,16 +71,13 @@ export default function ServiceBrand({
 
       const card = slider.querySelector(
         `.${styles.platformCard}`
-      ) as HTMLElement;
+      ) as HTMLElement | null;
 
       if (!card) return;
 
       const scrollAmount = card.offsetWidth + 30;
 
-      if (
-        slider.scrollLeft + slider.clientWidth >=
-        slider.scrollWidth - scrollAmount
-      ) {
+      if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - scrollAmount) {
         slider.scrollTo({ left: 0, behavior: "smooth" });
       } else {
         slider.scrollBy({ left: scrollAmount, behavior: "smooth" });
@@ -98,28 +96,33 @@ export default function ServiceBrand({
     if (!platforms.length) return;
     startAutoplay();
     return stopAutoplay;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [platforms.length]);
 
   /* =========================
      COUNTER ANIMATION
+     ✅ FIX: countersRef ora è HTMLSpanElement (non Div)
   ========================= */
 
-  const countersRef = useRef<HTMLDivElement[]>([]);
+  const countersRef = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
+    if (!service.metrics?.length) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
 
-          const el = entry.target as HTMLElement;
-          const target = Number(el.dataset.target);
-          let current = 0;
+          const el = entry.target as HTMLSpanElement;
+          const target = Number(el.dataset.target || 0);
 
+          let current = 0;
           const increment = target / 60;
 
           const update = () => {
             current += increment;
+
             if (current < target) {
               el.innerText = Math.floor(current).toString();
               requestAnimationFrame(update);
@@ -140,7 +143,7 @@ export default function ServiceBrand({
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [service.metrics]);
 
   return (
     <section
@@ -149,27 +152,17 @@ export default function ServiceBrand({
       data-index={index}
       className={`${styles.serviceBrand} ${active ? styles.isActive : ""}`}
     >
-
       {/* INTRO WHITE */}
       <div className={styles.brandIntro}>
         <div className={styles.brandIntroInner}>
-
           <div className={styles.brandIntroContent}>
             {service.kicker && (
-              <span className={styles.brandKicker}>
-                {service.kicker}
-              </span>
+              <span className={styles.brandKicker}>{service.kicker}</span>
             )}
 
-            <h2 className={styles.brandTitle}>
-              {service.title}
-            </h2>
+            <h2 className={styles.brandTitle}>{service.title}</h2>
 
-            {service.text && (
-              <p className={styles.brandText}>
-                {service.text}
-              </p>
-            )}
+            {service.text && <p className={styles.brandText}>{service.text}</p>}
           </div>
 
           {service.image?.asset?.url && (
@@ -183,7 +176,6 @@ export default function ServiceBrand({
               />
             </div>
           )}
-
         </div>
       </div>
 
@@ -195,9 +187,10 @@ export default function ServiceBrand({
           onMouseLeave={startAutoplay}
         >
           <div className={styles.platformContainer}>
-
             <button
+              type="button"
               className={styles.techArrow}
+              aria-label="Scorri a sinistra"
               onClick={() => {
                 stopAutoplay();
                 const slider = sliderRef.current;
@@ -205,7 +198,7 @@ export default function ServiceBrand({
 
                 const card = slider.querySelector(
                   `.${styles.platformCard}`
-                ) as HTMLElement;
+                ) as HTMLElement | null;
 
                 if (!card) return;
 
@@ -219,10 +212,7 @@ export default function ServiceBrand({
             </button>
 
             <div className={styles.platformViewport}>
-              <div
-                ref={sliderRef}
-                className={styles.platformSlider}
-              >
+              <div ref={sliderRef} className={styles.platformSlider}>
                 {platforms.map((platform, i) =>
                   platform.asset?.url ? (
                     <div key={i} className={styles.platformCard}>
@@ -240,7 +230,9 @@ export default function ServiceBrand({
             </div>
 
             <button
+              type="button"
               className={styles.techArrow}
+              aria-label="Scorri a destra"
               onClick={() => {
                 stopAutoplay();
                 const slider = sliderRef.current;
@@ -248,7 +240,7 @@ export default function ServiceBrand({
 
                 const card = slider.querySelector(
                   `.${styles.platformCard}`
-                ) as HTMLElement;
+                ) as HTMLElement | null;
 
                 if (!card) return;
 
@@ -260,7 +252,6 @@ export default function ServiceBrand({
             >
               <HiOutlineArrowRight />
             </button>
-
           </div>
         </div>
       )}
@@ -273,7 +264,8 @@ export default function ServiceBrand({
               <div key={i} className={styles.brandServiceCard}>
                 <h3>{item.title}</h3>
                 {item.description && <p>{item.description}</p>}
-                {item.bullets?.length && (
+
+                {!!item.bullets?.length && (
                   <ul>
                     {item.bullets.map((b, j) => (
                       <li key={j}>
@@ -297,16 +289,14 @@ export default function ServiceBrand({
               <div key={i} className={styles.metricItem}>
                 <span
                   ref={(el) => {
-                    if (el) countersRef.current[i] = el;
+                    countersRef.current[i] = el;
                   }}
                   data-target={metric.value}
                   className={styles.metricValue}
                 >
                   0
                 </span>
-                <span className={styles.metricSuffix}>
-                  {metric.suffix}
-                </span>
+                <span className={styles.metricSuffix}>{metric.suffix}</span>
                 <p>{metric.label}</p>
               </div>
             ))}
@@ -323,16 +313,12 @@ export default function ServiceBrand({
               {service.cta.text && <p>{service.cta.text}</p>}
             </div>
 
-            <a
-              href={service.cta.buttonLink}
-              className={styles.webCtaButton}
-            >
+            <a href={service.cta.buttonLink} className={styles.webCtaButton}>
               {service.cta.buttonLabel}
             </a>
           </div>
         </div>
       )}
-
     </section>
   );
 }
