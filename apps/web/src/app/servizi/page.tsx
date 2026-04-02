@@ -57,9 +57,9 @@ export async function generateMetadata(): Promise<Metadata> {
     servicesQuery
   );
 
-  const fallbackTitle = "Servizi — Too Digital";
+  const fallbackTitle = "Soluzioni — Too Digital";
   const fallbackDescription =
-    "Scopri i servizi di Too Digital: sviluppo web, branding, strategie digitali e progetti su misura.";
+    "Scopri le soluzioni di Too Digital: sviluppo web, branding, strategie digitali e progetti su misura.";
 
   const seo = data?.seo;
 

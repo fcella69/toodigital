@@ -35,7 +35,7 @@ type AboutPageData = {
 export async function generateMetadata(): Promise<Metadata> {
   const data = await sanityFetch<Pick<AboutPageData, "seo">>(aboutQuery);
 
-  const fallbackTitle = "Chi siamo — Too Digital";
+  const fallbackTitle = "Inside TooDigital — Too Digital";
   const fallbackDescription =
     "Scopri chi è Too Digital, il nostro approccio e la visione che guida i nostri progetti digitali.";
 

@@ -2,7 +2,7 @@ import { defineType, defineField } from "sanity";
 
 export default defineType({
     name: "aboutPage",
-    title: "Chi Siamo",
+    title: "Inside TooDigital",
     type: "document",
 
     fields: [
@@ -37,14 +37,14 @@ export default defineType({
         /* ================= INTRO ================= */
         defineField({
             name: "intro",
-            title: "Intro — Chi siamo",
+            title: "Intro — Inside TooDigital",
             type: "object",
             fields: [
                 defineField({
                     name: "kicker",
                     title: "Kicker",
                     type: "string",
-                    initialValue: "Chi siamo",
+                    initialValue: "Inside TooDigital",
                 }),
                 defineField({
                     name: "title",

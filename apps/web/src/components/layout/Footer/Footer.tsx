@@ -91,7 +91,7 @@ export default function Footer({ data }: Props) {
 
                 {/* MENU */}
                 <div className={styles.footerCol}>
-                    <h4>Servizi</h4>
+                    <h4>Soluzioni</h4>
                     {data.menuLinks?.map((link, i) => (
                         <Link key={i} href={link.href}>
                             {link.label}
