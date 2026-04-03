@@ -688,7 +688,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(160deg, rgba(20, 31, 53, 0.92) 0%, rgba(11, 14, 23, 0.97) 100%);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.876) 0%, rgba(112, 112, 112, 0.97) 100%);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 26px;
     box-shadow:
