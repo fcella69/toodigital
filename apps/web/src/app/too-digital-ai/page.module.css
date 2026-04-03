@@ -1,7 +1,11 @@
 .page {
-  background: #0b0e17;
-  color: #ffffff;
+  position: relative;
   min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(16, 74, 156, 0.18), transparent 35%),
+    radial-gradient(circle at 85% 20%, rgba(238, 98, 36, 0.12), transparent 28%),
+    linear-gradient(180deg, #070b14 0%, #0b0e17 100%);
+  overflow: hidden;
 }
 
 .hero {
@@ -9,62 +13,99 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  overflow: hidden;
+  padding: 148px 0 96px;
   isolation: isolate;
-  padding: 140px 0 100px;
-  background:
-    radial-gradient(circle at top left, rgba(80, 160, 255, 0.14), transparent 30%),
-    radial-gradient(circle at 80% 20%, rgba(238, 102, 36, 0.12), transparent 28%),
-    linear-gradient(180deg, #0b0e17 0%, #0d1220 100%);
 }
 
 .inner {
   position: relative;
-  z-index: 3;
-  width: 100%;
-  max-width: var(--container-width);
+  z-index: 2;
+  width: min(1280px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 0 var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.visualWrap {
+  order: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visualWrap::before {
+  content: "";
+  position: absolute;
+  width: min(68vw, 560px);
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(16, 74, 156, 0.22) 0%,
+      rgba(16, 74, 156, 0.08) 42%,
+      rgba(16, 74, 156, 0) 72%
+    );
+  filter: blur(34px);
+  transform: translate(6%, 2%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.visualImage {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(100%, 460px);
+  height: auto;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 28px 50px rgba(0, 0, 0, 0.28))
+    drop-shadow(0 10px 28px rgba(16, 74, 156, 0.12));
+  transform: translateY(6px);
+}
+
+.content {
+  order: 2;
+  max-width: 640px;
 }
 
 .eyebrow {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 18px;
   font-size: 0.78rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.68);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: rgba(214, 224, 255, 0.88);
 }
 
 .title {
-  margin-top: 18px;
-  font-family: var(--font-title);
-  font-size: clamp(2.8rem, 7vw, 5.6rem);
-  line-height: 0.98;
-  letter-spacing: 0.02em;
-  max-width: 8ch;
+  max-width: 10ch;
+  margin-bottom: 22px;
+  color: #f5f7ff;
 }
 
 .text {
-  margin-top: 28px;
-  max-width: 62ch;
-  font-size: 1.08rem;
+  margin-bottom: 16px;
+  font-size: clamp(1.02rem, 1.35vw, 1.14rem);
   line-height: 1.8;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(235, 239, 252, 0.88);
 }
 
 .textSecondary {
-  margin-top: 14px;
-  max-width: 58ch;
+  margin-bottom: 30px;
   font-size: 1rem;
-  line-height: 1.75;
-  color: rgba(255, 255, 255, 0.56);
+  line-height: 1.8;
+  color: rgba(188, 197, 224, 0.88);
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 34px;
+  gap: 14px;
 }
 
 .primaryButton,
@@ -73,89 +114,150 @@
   align-items: center;
   justify-content: center;
   min-height: 52px;
-  padding: 0 26px;
-  text-decoration: none;
-  font-family: var(--font-title);
-  font-size: 0.82rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  padding: 0 22px;
+  font-weight: 600;
+  font-size: 0.96rem;
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease,
-    background 0.25s ease;
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    background-color 0.28s ease,
+    color 0.28s ease,
+    box-shadow 0.28s ease;
 }
 
 .primaryButton {
   color: #ffffff;
-  background: linear-gradient(135deg, #ee6624, #8b411b);
-  box-shadow: 0 20px 50px rgba(238, 102, 36, 0.22);
+  background: linear-gradient(135deg, #ee6224 0%, #ea8922 100%);
+  box-shadow:
+    0 14px 30px rgba(238, 98, 36, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 .primaryButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 28px 60px rgba(238, 102, 36, 0.28);
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 34px rgba(238, 98, 36, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 .secondaryButton {
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  color: #eef3ff;
+  border: 1px solid rgba(120, 150, 220, 0.22);
+  background: rgba(15, 20, 34, 0.58);
+  backdrop-filter: blur(10px);
 }
 
 .secondaryButton:hover {
-  transform: translateY(-3px);
-  border-color: rgba(80, 160, 255, 0.34);
-  box-shadow: 0 20px 50px rgba(80, 160, 255, 0.14);
+  transform: translateY(-2px);
+  border-color: rgba(120, 150, 220, 0.42);
+  background: rgba(19, 26, 44, 0.78);
 }
 
 .orbOne,
 .orbTwo {
   position: absolute;
   border-radius: 999px;
-  filter: blur(100px);
+  filter: blur(90px);
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 }
 
 .orbOne {
-  width: 340px;
-  height: 340px;
-  left: -60px;
-  top: 80px;
-  background: rgba(80, 160, 255, 0.18);
+  top: 8%;
+  left: -8%;
+  width: 360px;
+  height: 360px;
+  background: rgba(16, 74, 156, 0.22);
 }
 
 .orbTwo {
-  width: 300px;
-  height: 300px;
-  right: -40px;
-  bottom: 80px;
-  background: rgba(238, 102, 36, 0.14);
+  right: -8%;
+  bottom: 12%;
+  width: 320px;
+  height: 320px;
+  background: rgba(238, 98, 36, 0.14);
 }
 
 .grid {
   position: absolute;
   inset: 0;
   z-index: 0;
-  pointer-events: none;
-  opacity: 0.08;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
   background-size: 48px 48px;
-  mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+  mask-image: radial-gradient(circle at center, black 38%, transparent 88%);
+  opacity: 0.26;
+  pointer-events: none;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 900px) {
   .hero {
-    padding: 120px 0 80px;
+    padding: 156px 0 112px;
+  }
+
+  .inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 56px;
+  }
+
+  .content {
+    order: 1;
+    max-width: 620px;
+  }
+
+  .visualWrap {
+    order: 2;
+    justify-content: flex-end;
+    padding-right: 12px;
+  }
+
+  .visualWrap::before {
+    width: min(42vw, 600px);
+    transform: translate(8%, 4%);
+  }
+
+  .visualImage {
+    width: min(100%, 580px);
+    max-height: 76vh;
+  }
+}
+
+@media (max-width: 899px) {
+  .page {
+    overflow-x: clip;
+  }
+
+  .hero {
+    padding: 120px 0 84px;
+  }
+
+  .inner {
+    width: min(100% - 32px, 1280px);
+    gap: 24px;
   }
 
   .title {
-    max-width: 100%;
+    max-width: none;
+    margin-bottom: 18px;
+  }
+
+  .text,
+  .textSecondary {
+    max-width: none;
+  }
+
+  .visualWrap::before {
+    width: min(92vw, 420px);
+    filter: blur(28px);
+    transform: translate(0, 2%);
+  }
+
+  .visualImage {
+    width: min(100%, 360px);
+    transform: translateY(2px);
   }
 
   .actions {
@@ -166,5 +268,39 @@
   .primaryButton,
   .secondaryButton {
     width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding: 112px 0 72px;
+  }
+
+  .inner {
+    width: min(100% - 24px, 1280px);
+  }
+
+  .visualWrap::before {
+    width: min(94vw, 320px);
+    filter: blur(24px);
+  }
+
+  .visualImage {
+    width: min(100%, 300px);
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
+  }
+
+  .text {
+    font-size: 0.98rem;
+    line-height: 1.75;
+  }
+
+  .textSecondary {
+    font-size: 0.96rem;
+    line-height: 1.72;
+    margin-bottom: 24px;
   }
 }
