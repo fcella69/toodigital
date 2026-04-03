@@ -70,6 +70,7 @@
 .content {
   order: 2;
   max-width: 640px;
+  padding: 20px;
 }
 
 .eyebrow {
