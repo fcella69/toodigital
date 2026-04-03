@@ -243,8 +243,8 @@ export default function ServiceGrowth({
                       <Image
                         src={it.icon.asset.url}
                         alt={it.icon.alt || ""}
-                        width={46}
-                        height={46}
+                        width={120}
+                        height={40}
                       />
                     ) : null}
                   </div>

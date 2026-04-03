@@ -943,24 +943,28 @@
 }
 
 .growthIdentityIcon {
-    width: 78px;
-    height: 78px;
-    border-radius: 18px;
+    width: 100%;
+    min-height: 52px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    background: linear-gradient(180deg, #ffffff 0%, #eef2f8 100%);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    overflow: hidden;
+    justify-content: flex-start;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
     position: relative;
     z-index: 1;
+    margin-bottom: 0px;
 }
 
 .growthIdentityIcon :global(img) {
-    width: 100% !important;
-    height: 100% !important;
+    width: auto !important;
+    height: 100px !important;
+    max-width: 160px;
     object-fit: contain !important;
     display: block;
+    background: transparent !important;
 }
 
 .growthIdentityCardTitle {
