@@ -324,6 +324,63 @@ html {
 }
 
 /* =========================
+   MOBILE / TOUCH OPTIMIZATION
+========================= */
+
+@media (max-width: 1024px), (pointer: coarse) {
+  .routeTransitionContent {
+    animation: routeContentFadeMobile 0.24s ease-out both;
+    animation-delay: 0s;
+  }
+
+  .routeTransitionOverlay {
+    animation: routeOverlaySweepMobile 0.38s ease-out forwards;
+    filter: none !important;
+    background: linear-gradient(
+      90deg,
+      rgba(12, 60, 128, 0.72) 0%,
+      rgba(16, 74, 156, 0.38) 45%,
+      rgba(16, 74, 156, 0) 100%
+    );
+  }
+
+  .routeTransitionOverlay::before,
+  .routeTransitionOverlay::after {
+    display: none;
+  }
+}
+
+@keyframes routeOverlaySweepMobile {
+  0% {
+    opacity: 0;
+    transform: translate3d(-108%, 0, 0);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(108%, 0, 0);
+  }
+}
+
+@keyframes routeContentFadeMobile {
+  0% {
+    opacity: 0.9;
+    transform: translateY(2px);
+    filter: none;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: none;
+  }
+}
+
+/* =========================
    CUSTOM CURSOR
    IMPORTANTE:
    Metti il file qui:
