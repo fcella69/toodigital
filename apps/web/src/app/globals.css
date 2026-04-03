@@ -14,6 +14,7 @@ html,
 body {
   width: 100%;
   height: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -63,24 +64,20 @@ body {
   ========================= */
 
   /* Primary accent */
-  --gradient-primary: linear-gradient(135deg,
-      #ee6224 0%,
-      #ea8922 100%);
+  --gradient-primary: linear-gradient(135deg, #ee6224 0%, #ea8922 100%);
 
   /* Blue brand */
-  --gradient-secondary: linear-gradient(135deg,
-      #0c3c80 0%,
-      #104a9c 100%);
+  --gradient-secondary: linear-gradient(135deg, #0c3c80 0%, #104a9c 100%);
 
   /* Subtle depth */
-  --gradient-dark: linear-gradient(180deg,
-      rgba(11, 14, 23, 0) 0%,
-      #0b0e17 100%);
+  --gradient-dark: linear-gradient(180deg, rgba(11, 14, 23, 0) 0%, #0b0e17 100%);
 
   /* Ambient corporate glow */
-  --gradient-ambient: radial-gradient(circle at 20% 15%,
-      rgba(16, 74, 156, 0.18),
-      transparent 60%);
+  --gradient-ambient: radial-gradient(
+    circle at 20% 15%,
+    rgba(16, 74, 156, 0.18),
+    transparent 60%
+  );
 
   /* =========================
      LAYOUT
@@ -178,9 +175,7 @@ button {
 ========================= */
 
 .bg-ambient {
-  background:
-    var(--gradient-ambient),
-    var(--color-bg);
+  background: var(--gradient-ambient), var(--color-bg);
 }
 
 .bg-dark {
@@ -189,4 +184,190 @@ button {
 
 .bg-elevated {
   background-color: var(--color-bg-elevated);
+}
+
+/* =========================
+   GLOBAL SCROLLBAR
+========================= */
+
+html {
+  scrollbar-width: auto;
+  scrollbar-color: rgba(72, 96, 180, 0.85) #0b0f17;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #292b30;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(72, 96, 180, 0.95) 0%,
+    rgba(38, 52, 110, 0.95) 100%
+  );
+  border-radius: 999px;
+  border: 2px solid #0b0f17;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(94, 120, 220, 0.95) 0%,
+    rgba(52, 70, 145, 0.95) 100%
+  );
+}
+
+::-webkit-scrollbar-corner {
+  background: #0b0f17;
+}
+
+/* =========================
+   ROUTE TRANSITION
+========================= */
+
+.routeTransitionContent {
+  position: relative;
+  z-index: 1;
+  animation: routeContentFade 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.08s;
+}
+
+.routeTransitionOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    rgba(8, 28, 64, 1) 0%,
+    rgba(12, 60, 128, 0.98) 18%,
+    rgba(16, 74, 156, 0.92) 42%,
+    rgba(43, 114, 214, 0.45) 74%,
+    rgba(43, 114, 214, 0) 100%
+  );
+  transform: translate3d(-118%, 0, 0);
+  will-change: transform, opacity;
+  animation: routeOverlaySweep 1.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  filter: blur(10px);
+}
+
+.routeTransitionOverlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.06) 42%,
+      rgba(255, 255, 255, 0) 70%
+    );
+  mix-blend-mode: screen;
+}
+
+.routeTransitionOverlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 18vw;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(120, 180, 255, 0) 0%,
+    rgba(120, 180, 255, 0.28) 50%,
+    rgba(120, 180, 255, 0) 100%
+  );
+  filter: blur(42px);
+  transform: translateX(42%);
+}
+
+@keyframes routeOverlaySweep {
+  0% {
+    opacity: 0;
+    transform: translate3d(-118%, 0, 0);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(118%, 0, 0);
+  }
+}
+
+@keyframes routeContentFade {
+  0% {
+    opacity: 0.62;
+    transform: translateY(10px) scale(0.992);
+    filter: blur(5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* =========================
+   CUSTOM CURSOR
+   IMPORTANTE:
+   Metti il file qui:
+   /public/cursor/cursor-orange-48.png
+========================= */
+
+@media (pointer: fine) {
+  html,
+  body {
+    cursor: url("/cursor/cursor-orange-28.png") 3 2, auto;
+  }
+
+  a,
+  button,
+  [role="button"],
+  summary,
+  select,
+  label,
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"] {
+    cursor: url("/cursor/cursor-orange-28.png") 3 2, pointer;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="number"],
+  textarea,
+  [contenteditable="true"] {
+    cursor: text;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .routeTransitionContent,
+  .routeTransitionOverlay {
+    animation: none !important;
+  }
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import styles from "./FullscreenMenu.module.css";
@@ -9,7 +10,6 @@ import {
   FaLinkedinIn,
   FaXTwitter,
 } from "react-icons/fa6";
-
 
 import type { HeaderData } from "./Header";
 
@@ -24,26 +24,50 @@ const SOCIAL_ICONS = {
   facebook: FaFacebookF,
   linkedin: FaLinkedinIn,
   twitter: FaXTwitter,
-};
+  x: FaXTwitter,
+} as const;
 
+const SOCIAL_LABELS = {
+  instagram: "Instagram",
+  facebook: "Facebook",
+  linkedin: "LinkedIn",
+  twitter: "Twitter",
+  x: "X",
+} as const;
 
-export default function FullscreenMenu({
-  open,
-  onClose,
-  data,
-}: Props) {
+function normalizeSocialType(type?: string) {
+  return (type ?? "").trim().toLowerCase();
+}
+
+function getSocialLabel(type?: string) {
+  const normalized = normalizeSocialType(type);
+
+  if (!normalized) return "Social";
+
+  return (
+    SOCIAL_LABELS[normalized as keyof typeof SOCIAL_LABELS] ??
+    `${normalized.charAt(0).toUpperCase()}${normalized.slice(1)}`
+  );
+}
+
+function getSocialIcon(type?: string) {
+  const normalized = normalizeSocialType(type);
+
+  return SOCIAL_ICONS[normalized as keyof typeof SOCIAL_ICONS] ?? null;
+}
+
+export default function FullscreenMenu({ open, onClose, data }: Props) {
   const [shouldRender, setShouldRender] = useState(open);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
-
   const tlRef = useRef<gsap.core.Timeline | null>(null);
 
-  /* PREVENT FLASH */
   useLayoutEffect(() => {
     if (!overlayRef.current) return;
+
     gsap.set(overlayRef.current, {
       autoAlpha: 0,
       pointerEvents: "none",
@@ -51,8 +75,37 @@ export default function FullscreenMenu({
   }, []);
 
   useEffect(() => {
-    if (open) setShouldRender(true);
+    if (open) {
+      setShouldRender(true);
+    }
   }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open, onClose]);
 
   useEffect(() => {
     if (!shouldRender || !overlayRef.current) return;
@@ -131,72 +184,72 @@ export default function FullscreenMenu({
   if (!shouldRender) return null;
 
   return (
-    <div ref={overlayRef} className={styles.overlay}>
+    <div ref={overlayRef} className={styles.overlay} aria-hidden={!open}>
       <div className={styles.container}>
-        {/* LEFT */}
-        <nav ref={leftRef} className={styles.left}>
+        <nav ref={leftRef} className={styles.left} aria-label="Menu principale">
           <ul>
-            {data?.menuLeft?.map((item, i) => (
-              <li key={i}>
-                <a href={item.link}>{item.label}</a>
+            {data?.menuLeft?.map((item, index) => (
+              <li key={`${item.link}-${index}`}>
+                <Link href={item.link} onClick={onClose}>
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
         </nav>
 
-        {/* RIGHT */}
         <div ref={rightRef} className={styles.right}>
           {data?.menuRightTitle && (
             <span className={styles.sectionTitle}>
-              <a href={data?.menuRightTitle?.link}>
-                {data?.menuRightTitle?.label}
-              </a>
+              <Link href={data.menuRightTitle.link} onClick={onClose}>
+                {data.menuRightTitle.label}
+              </Link>
             </span>
           )}
 
           <ul>
-            {data?.menuRight?.map((item, i) => (
-              <li key={i}>
-                <a href={item.link}>{item.label}</a>
+            {data?.menuRight?.map((item, index) => (
+              <li key={`${item.link}-${index}`}>
+                <Link href={item.link} onClick={onClose}>
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
         </div>
       </div>
 
-      {/* BOTTOM */}
       <div ref={bottomRef} className={styles.bottom}>
-        {data?.address && (
-          <div className={styles.address}>{data.address}</div>
-        )}
+        {data?.address && <div className={styles.address}>{data.address}</div>}
 
         {data?.bottomTags && (
-          <div className={styles.bottomCenter}>
-            {data.bottomTags}
-          </div>
+          <div className={styles.bottomCenter}>{data.bottomTags}</div>
         )}
 
         <div className={styles.socials}>
-          {data?.socials?.map((s, i) => {
-            const Icon = SOCIAL_ICONS[s.type];
+          {data?.socials?.map((social, index) => {
+            const Icon = getSocialIcon(social.type);
+            const label = getSocialLabel(social.type);
 
             return (
               <a
-                key={i}
-                href={s.url}
+                key={`${social.url}-${index}`}
+                href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={label}
+                title={label}
               >
-                <Icon />
-                <span>{s.type}</span>
+                {Icon && <Icon />}
+                <span>{label}</span>
               </a>
             );
           })}
         </div>
-
       </div>
 
       <button
+        type="button"
         className={styles.closeArea}
         aria-label="Chiudi menu"
         onClick={onClose}
