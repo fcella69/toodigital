@@ -1,10 +1,12 @@
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import styles from "./LegalPage.module.css";
+import type { ReactNode } from "react";
 
 type Props = {
   title: string;
   updatedAt?: string;
   content?: any[];
+  children?: ReactNode;
 };
 
 const portableTextComponents: PortableTextComponents = {
@@ -58,7 +60,12 @@ function formatDate(date?: string) {
   }
 }
 
-export default function LegalPage({ title, updatedAt, content = [] }: Props) {
+export default function LegalPage({
+  title,
+  updatedAt,
+  content = [],
+  children,
+}: Props) {
   const formattedDate = formatDate(updatedAt);
 
   return (
@@ -81,6 +88,8 @@ export default function LegalPage({ title, updatedAt, content = [] }: Props) {
               components={portableTextComponents}
             />
           </article>
+
+          {children}
         </div>
       </section>
     </main>

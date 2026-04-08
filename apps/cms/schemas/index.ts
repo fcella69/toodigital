@@ -12,6 +12,7 @@ import contactRequest from "./documents/contactRequest";
 import seo from "./objects/seo";
 import privacyPolicy from "./documents/privacyPolicy";
 import termsConditions from "./documents/termsConditions";
+import cookiePolicy from "./documents/cookiePolicy";
 
 export const schemaTypes = [
   page,
@@ -28,4 +29,5 @@ export const schemaTypes = [
   contactRequest,
   privacyPolicy,
   termsConditions,
+  cookiePolicy,
 ];

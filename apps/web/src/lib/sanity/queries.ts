@@ -444,4 +444,22 @@ export const termsConditionsQuery = `
 }
 `;
 
+export const cookiePolicyQuery = `
+*[_type == "cookiePolicy"][0]{
+  seo{
+    title,
+    description,
+    noIndex,
+    ogImage{
+      asset->{url},
+      alt
+    }
+  },
+  title,
+  updatedAt,
+  content,
+  cookiebotDeclarationScript
+}
+`;
+
 
