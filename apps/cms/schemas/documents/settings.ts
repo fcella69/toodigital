@@ -37,5 +37,34 @@ export default defineType({
       type: "text",
       rows: 3,
     }),
+    defineField({
+      name: "cookiebotEnabled",
+      title: "Abilita Cookiebot",
+      type: "boolean",
+      initialValue: false,
+    }),
+
+    defineField({
+      name: "cookiebotCbid",
+      title: "Cookiebot CBID",
+      type: "string",
+      description: "Inserisci il Domain Group ID / CBID fornito da Cookiebot.",
+      hidden: ({ parent }) => !parent?.cookiebotEnabled,
+    }),
+
+    defineField({
+      name: "cookiebotCulture",
+      title: "Lingua Cookiebot",
+      type: "string",
+      initialValue: "IT",
+      options: {
+        list: [
+          { title: "Italiano", value: "IT" },
+          { title: "English", value: "EN" },
+        ],
+        layout: "radio",
+      },
+      hidden: ({ parent }) => !parent?.cookiebotEnabled,
+    }),
   ],
 });

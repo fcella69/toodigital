@@ -10,6 +10,8 @@ import footerSettings from "./documents/footerSettings";
 import jobApplication from "./documents/jobApplication";
 import contactRequest from "./documents/contactRequest";
 import seo from "./objects/seo";
+import privacyPolicy from "./documents/privacyPolicy";
+import termsConditions from "./documents/termsConditions";
 
 export const schemaTypes = [
   page,
@@ -24,4 +26,6 @@ export const schemaTypes = [
   services,
   jobApplication,
   contactRequest,
+  privacyPolicy,
+  termsConditions,
 ];

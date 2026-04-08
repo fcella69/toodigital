@@ -391,7 +391,10 @@ export const settingsQuery = groq`
     favicon{
       asset->{url},
       alt
-    }
+    },
+    cookiebotEnabled,
+    cookiebotCbid,
+    cookiebotCulture
   }
 `;
 
@@ -404,6 +407,40 @@ export const footerQuery = `
   policyLinks[]{ label, href },
   socialLinks[]{ platform, url },
   copyrightText
+}
+`;
+
+export const privacyPolicyQuery = `
+*[_type == "privacyPolicy"][0]{
+  seo{
+    title,
+    description,
+    noIndex,
+    ogImage{
+      asset->{url},
+      alt
+    }
+  },
+  title,
+  updatedAt,
+  content
+}
+`;
+
+export const termsConditionsQuery = `
+*[_type == "termsConditions"][0]{
+  seo{
+    title,
+    description,
+    noIndex,
+    ogImage{
+      asset->{url},
+      alt
+    }
+  },
+  title,
+  updatedAt,
+  content
 }
 `;
 

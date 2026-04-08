@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Header from "@/components/layout/Header/Header";
 import Footer from "@/components/layout/Footer/Footer";
+import CookiebotScript from "@/components/cookies/CookiebotScript";
 
 import { sanityFetch } from "@/lib/sanity/fetch";
 import {
@@ -43,14 +44,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const faviconUrl = settings?.favicon?.asset?.url;
 
   return {
-
     title: {
       default: defaultTitle,
       template: `%s | ${siteName}`,
     },
-
     description: defaultDescription,
-
     icons: faviconUrl
       ? {
           icon: faviconUrl,
@@ -72,16 +70,25 @@ export default async function RootLayout({
 }) {
   const headerData = await sanityFetch<any>(headerQuery);
   const footerData = await sanityFetch<any>(footerQuery);
+  const settings = await sanityFetch<any>(settingsQuery);
 
   return (
     <html
       lang="it"
       className={`${jakarta.variable} ${inter.variable}`}
     >
+      <head>
+        {settings?.cookiebotEnabled && settings?.cookiebotCbid && (
+          <CookiebotScript
+            cbid={settings.cookiebotCbid}
+            culture={settings?.cookiebotCulture || "IT"}
+          />
+        )}
+      </head>
+
       <body>
         <Header data={headerData} />
 
-        {/* WRAPPER NECESSARIO PER FOOTER REVEAL */}
         <div className="pageContent">
           {children}
         </div>
