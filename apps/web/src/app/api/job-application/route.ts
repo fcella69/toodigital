@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
 
         // INVIO EMAIL CON RESEND
         await resend.emails.send({
-            from: "Too Digital <onboarding@resend.dev>", // temporaneo
+            from: "Too Digital <email@toodigital.it>", // temporaneo
             to: recipients.length ? recipients : ["tuaemail@gmail.com"],
             subject: `Nuova candidatura: ${name} ${surname}`,
             html: `

@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
       settings?.form?.contactEmails?.filter(Boolean) || [];
 
     await resend.emails.send({
-      from: "Too Digital <onboarding@resend.dev>", // cambierai dopo dominio verificato
+      from: "Too Digital <email@toodigital.it>", // cambierai dopo dominio verificato
       to: recipients.length
         ? recipients
         : ["tuaemail@gmail.com"],
